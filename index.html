@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex de Jean-François</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="pokepics/logo.webp" alt="Logo Pokedex" class="logo">
+        <img src="pokepics/logo.webp" alt="Logo Pokedex" class="logo-right">
+        <h1>Pokedex - Galerie des Pokémons</h1>
+        <h2>Découvrez les Pokémons et leurs types à travers une galerie interactive</h2>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Rechercher un Pokémon...">
+            <button class="search-button">Rechercher</button>
+        </div>
+    </header>
+
+    <div class="moncontainer">
+        <section class="pokemon1">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#001</span>
+                <h3 class="pokemon-name">Bulbizarre</h3>
+                <span class="pokemon-type">Type: <span class="type-plante">Plante</span>/<span class="type-poison">Poison</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-bulbizarre">
+                    Évolution
+                </button>
+            </div>
+            <img src="pokepics/bulbizarre.png" alt="bulbizarre" class="pokepix">
+        </section>
+
+        <section class="pokemon2">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#004</span>
+                <h3 class="pokemon-name">Salamèche</h3>
+                <span class="pokemon-type">Type: <span class="type-feu">Feu</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-salameche">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/salameche.png" alt="salameche">
+        </section>
+
+        <section class="pokemon3">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#007</span>
+                <h3 class="pokemon-name">Carapuce</h3>
+                <span class="pokemon-type">Type: <span class="type-eau">Eau</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-carapuce">
+                    Évolution
+                </button>   
+            </div>
+            <img src="/pokepics/carapuce.png" alt="carapuce">
+        </section>
+
+        <section class="pokemon4">  
+            <div class="pokemon-info">
+                <span class="pokemon-number">#013</span>
+                <h3 class="pokemon-name">Aspicot</h3>
+                <span class="pokemon-type">Type: <span class="type-insecte">Insecte</span>/<span class="type-poison">Poison</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-aspicot">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/aspicot.png" alt="aspicot">
+        </section>
+
+        <section class="pokemon5">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#019</span>
+                <h3 class="pokemon-name">Rattata</h3>   
+                <span class="pokemon-type">Type: <span class="type-normal">Normal</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-rattata">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/rattata.png" alt="rattata">
+        </section>  
+        
+        <section class="pokemon6">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#025</span>
+                <h3 class="pokemon-name">Pikachu</h3>
+                <span class="pokemon-type">Type: <span class="type-electrique">Électrique</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-pikachu">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/pikachu.png" alt="pikachu">
+        </section>
+
+        <section class="pokemon7">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#037</span>
+                <h3 class="pokemon-name">Goupix</h3>
+                <span class="pokemon-type">Type: <span class="type-feu">Feu</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-goupix">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/goupix.png" alt="goupix">
+        </section>
+
+        <section class="pokemon8">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#039</span>
+                <h3 class="pokemon-name">Rondoudou</h3>
+                <span class="pokemon-type">Type: <span class="type-normal">Normal</span>/<span class="type-fee">Fée</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-rondoudou">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/rondoudou.png" alt="rondoudou">
+        </section>
+
+        <section class="pokemon9">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#048</span>
+                <h3 class="pokemon-name">Mimitoss</h3>
+                <span class="pokemon-type">Type: <span class="type-insecte">Insecte</span>/<span class="type-poison">Poison</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-mimitoss">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/mimitoss.png" alt="mimitoss">
+        </section>
+
+        <section class="pokemon10">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#050</span>
+                <h3 class="pokemon-name">Taupiqueur</h3>
+                <span class="pokemon-type">Type: <span class="type-sol">Sol</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-taupiqueur">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/taupiqueur.png" alt="taupiqueur">
+        </section>
+        
+        <section class="pokemon11">
+            <div class="pokemon-info">  
+                <span class="pokemon-number">#054</span>
+                <h3 class="pokemon-name">Psykokwak</h3>
+                <span class="pokemon-type">Type: <span class="type-eau">Eau</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-psykokwak">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/psykokwak.png" alt="psykokwak">
+        </section>
+        
+        <section class="pokemon12">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#077</span>
+                <h3 class="pokemon-name">Ponyta</h3>        
+                <span class="pokemon-type">Type: <span class="type-feu">Feu</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-ponyta">
+                    Évolution
+                </button>
+            </div>
+            <img src="/pokepics/ponyta.png" alt="ponyta">
+        </section>
+    </div>
+
+    <footer class="contact">
+        <div class="footer-content">
+            <p>Contactez-moi :</p>
+            <p><a href="mailto:jfthebeanz@hotmail.com">Envoyer moi un mail.</a></p>
+            <p>Téléphone : 1-800-POKEMON</p>   
+            <p>À propos :</p>
+            <p>Ce site est à l'attention des fans de Pokémon dont le plus grand fan est Ahmed Imed Eddine Rabbah</p>
+        </div>
+        <p>&copy; 2025 Pokedex de Jean-François Lefebvre. Tous droits réservés.</p>
+    </footer>
+
+    <div class="modal-dialog modal-dialog-centered modal-custom-width">
+        <div class="modal fade" id="evolution-bulbizarre" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+          
+                <div class="modal-header">
+                  <h5 class="modal-title">Évolution de Bulbizarre</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+          
+                <div class="modal-body">
+                  <div class="pokemon-card shiny-glow">
+          
+                    <div id="evolutionCarousel-bulbizarre" class="carousel slide">
+                      <div class="carousel-inner">
+          
+                        <!-- Bulbizarre -->
+                        <div class="carousel-item active text-center">
+                          <img src="pokepics/bulbizarre.png" class="d-block w-100" alt="Bulbizarre">
+                          <span class="pokemon-number">#001</span>
+                          <h4 class="pokemon-name">Bulbizarre</h4>
+                          <p class="pokemon-type">
+                            Type: <span class="type-plante">Plante</span> / <span class="type-poison">Poison</span>
+                          </p>
+                        </div>
+          
+                        <!-- Herbizarre -->
+                        <div class="carousel-item text-center">
+                          <img src="pokepics/herbizarre.png" class="d-block w-100" alt="Herbizarre">
+                          <span class="pokemon-number">#002</span>
+                          <h4 class="pokemon-name">Herbizarre</h4>
+                          <p class="pokemon-type">
+                            Type: <span class="type-plante">Plante</span> / <span class="type-poison">Poison</span>
+                          </p>
+                        </div>
+          
+                        <!-- Florizarre -->
+                        <div class="carousel-item text-center">
+                          <img src="pokepics/florizarre.png" class="d-block w-100" alt="Florizarre">
+                          <span class="pokemon-number">#003</span>
+                          <h4 class="pokemon-name">Florizarre</h4>
+                          <p class="pokemon-type">
+                            Type: <span class="type-plante">Plante</span> / <span class="type-poison">Poison</span>
+                          </p>
+                        </div>
+
+                      </div>                                
+                      <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-bulbizarre" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Précédent</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-bulbizarre" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Suivant</span>
+                      </button>
+                     </div> 
+          
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+          </div> 
+
+        <div class="modal fade" id="evolution-salameche" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Salamèche</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-salameche" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Salamèche -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/salameche.png" class="d-block w-100" alt="Salamèche">
+                                        <span class="pokemon-number">#004</span>
+                                        <h4 class="pokemon-name">Salamèche</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Reptincel -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/reptincel.png" class="d-block w-100" alt="Reptincel">
+                                        <span class="pokemon-number">#005</span>
+                                        <h4 class="pokemon-name">Reptincel</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Dracaufeu -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/dracaufeu.png" class="d-block w-100" alt="Dracaufeu">
+                                        <span class="pokemon-number">#006</span>
+                                        <h4 class="pokemon-name">Dracaufeu</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span> / <span class="type-vol">Vol</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-salameche" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-salameche" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="modal fade" id="evolution-carapuce" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Carapuce</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-carapuce" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Carapuce -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/carapuce.png" class="d-block w-100" alt="Carapuce">
+                                        <span class="pokemon-number">#007</span>
+                                        <h4 class="pokemon-name">Carapuce</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-eau">Eau</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Carabaffe -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/carabaffe.png" class="d-block w-100" alt="Carabaffe">
+                                        <span class="pokemon-number">#008</span>
+                                        <h4 class="pokemon-name">Carabaffe</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-eau">Eau</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Tortank-->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/tortank.png" class="d-block w-100" alt="Tortank">
+                                        <span class="pokemon-number">#009</span>
+                                        <h4 class="pokemon-name">Tortank</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-eau">Eau</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-carapuce" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-carapuce" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="modal fade" id="evolution-aspicot" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution d'Aspicot</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-aspicot" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Aspicot -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/aspicot.png" class="d-block w-100" alt="Aspicot">
+                                        <span class="pokemon-number">#013</span>
+                                        <h4 class="pokemon-name">Aspicot</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-insecte">Insecte</span> / <span class="type-poison">Poison</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Coconfort -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/coconfort.png" class="d-block w-100" alt="Coconfort">
+                                        <span class="pokemon-number">#014</span>
+                                        <h4 class="pokemon-name">Coconfort</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-insecte">Insecte</span> / <span class="type-poison">Poison</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Dardargnan -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/dardargnan.png" class="d-block w-100" alt="Dardargnan">
+                                        <span class="pokemon-number">#015</span>
+                                        <h4 class="pokemon-name">Dardargnan</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-insecte">Insecte</span> / <span class="type-poison">Poison</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-aspicot" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-aspicot" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+        <div class="modal fade" id="evolution-rattata" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Rattata</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-rattata" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Rattata -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/rattata.png" class="d-block w-100" alt="Rattata">
+                                        <span class="pokemon-number">#019</span>
+                                        <h4 class="pokemon-name">Rattata</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-normal">Normal</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Rattatac -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/rattatac.png" class="d-block w-100" alt="Rattatac">
+                                        <span class="pokemon-number">#020</span>
+                                        <h4 class="pokemon-name">Rattatac</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-normal">Normal</span>
+                                        </p>
+                                    </div>                                   
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-rattata" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-rattata" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+    
+        <div class="modal fade" id="evolution-pikachu" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Pikachu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-pikachu" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Pichu -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/pichu.png" class="d-block w-100" alt="Pichu">
+                                        <span class="pokemon-number">#0172</span>
+                                        <h4 class="pokemon-name">Pichu</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-electrique">Électrique</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Pikachu -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/pikachu.png" class="d-block w-100" alt="Pikachu">
+                                        <span class="pokemon-number">#025</span>
+                                        <h4 class="pokemon-name">Pikachu</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-electrique">Électrique</span>
+                                        </p>
+                                    </div>
+
+                                        <!-- Raichu -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/Raichu.png" class="d-block w-100" alt="Raichu">
+                                        <span class="pokemon-number">#026</span>
+                                        <h4 class="pokemon-name">Raichu</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-electrique">Électrique</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-pikachu" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-pikachu" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+
+        
+        <div class="modal fade" id="evolution-goupix" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Goupix</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-goupix" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Goupix -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/goupix.png" class="d-block w-100" alt="Goupix">
+                                        <span class="pokemon-number">#037</span>
+                                        <h4 class="pokemon-name">Goupix</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Coconfort -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/feunard.png" class="d-block w-100" alt="Feunard">
+                                        <span class="pokemon-number">#038</span>
+                                        <h4 class="pokemon-name">Feunard</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-goupix" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-goupix" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+        <div class="modal fade" id="evolution-rondoudou" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Rondoudou</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            
+                            <div id="evolutionCarousel-rondoudou" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Rondoudou -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/toudoudou.png" class="d-block w-100" alt="Toudoudou">
+                                        <span class="pokemon-number">#039</span>
+                                        <h4 class="pokemon-name">Toudoudou</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-normal">Normal</span> / <span class="type-fee">Fée</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Rondoudou -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/rondoudou.png" class="d-block w-100" alt="Rondoudou">
+                                        <span class="pokemon-number">#039</span>
+                                        <h4 class="pokemon-name">Rondoudou</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-normal">Normal</span> / <span class="type-fee">Fée</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/grodoudou.png" class="d-block w-100" alt="Grodoudou">
+                                        <span class="pokemon-number">#039</span>
+                                        <h4 class="pokemon-name">Grodoudou</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-normal">Normal</span> / <span class="type-fee">Fée</span>
+                                        </p>
+                                    </div>
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-rondoudou" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-rondoudou" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+
+
+        <div class="modal fade" id="evolution-mimitoss" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Mimitoss</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            
+                            <div id="evolutionCarousel-mimitoss" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Mimitoss -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/mimitoss.png" class="d-block w-100" alt="Mimitoss">
+                                        <span class="pokemon-number">#048</span>
+                                        <h4 class="pokemon-name">Mimitoss</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-insecte">Insecte</span> / <span class="type-poison">Poison</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Aeromite -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/aeromite.png" class="d-block w-100" alt="Aeromite">
+                                        <span class="pokemon-number">#049</span>
+                                        <h4 class="pokemon-name">Aeromite</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-vol">Vol</span> / <span class="type-fee">Fée</span>
+                                        </p>
+                                    </div>                           
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-mimitoss" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-mimitoss" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+
+
+        
+        <div class="modal fade" id="evolution-taupiqueur" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Taupiqueur</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            
+                            <div id="evolutionCarousel-taupiqueur" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Taupiqueur -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/taupiqueur.png" class="d-block w-100" alt="Taupiqueur">
+                                        <span class="pokemon-number">#050</span>
+                                        <h4 class="pokemon-name">Taupiqueur</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-sol">Sol</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Triopikeur -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/triopikeur.png" class="d-block w-100" alt="Triopikeur">
+                                        <span class="pokemon-number">#051</span>
+                                        <h4 class="pokemon-name">Triopikeur</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-sol">Sol</span>
+                                        </p>
+                                    </div>                           
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-taupiqueur" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-taupiqueur" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+
+
+        <div class="modal fade" id="evolution-psykokwak" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Psykokwak</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            
+                            <div id="evolutionCarousel-psykokwak" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Psykokwak -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/psykokwak.png" class="d-block w-100" alt="Psykokwak">
+                                        <span class="pokemon-number">#054</span>
+                                        <h4 class="pokemon-name">Psykokwak</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-eau">Eau</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Akwakwak -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/akwakwak.png" class="d-block w-100" alt="Akwakwak">
+                                        <span class="pokemon-number">#055</span>
+                                        <h4 class="pokemon-name">Akwakwak</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-eau">Eau</span>
+                                        </p>
+                                    </div>                           
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-psykokwak" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-psykokwak" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+
+
+        <div class="modal fade" id="evolution-ponyta" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title">Évolution de Ponyta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            
+                            <div id="evolutionCarousel-ponyta" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <!-- Ponyta -->
+                                    <div class="carousel-item active text-center">
+                                        <img src="pokepics/ponyta.png" class="d-block w-100" alt="Ponyta">
+                                        <span class="pokemon-number">#077</span>
+                                        <h4 class="pokemon-name">Ponyta</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Galopa -->
+                                    <div class="carousel-item text-center">
+                                        <img src="pokepics/galopa.png" class="d-block w-100" alt="Galopa">
+                                        <span class="pokemon-number">#078</span>
+                                        <h4 class="pokemon-name">Galopa</h4>
+                                        <p class="pokemon-type">
+                                            Type: <span class="type-feu">Feu</span>
+                                        </p>
+                                    </div>                           
+
+                                    
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-ponyta" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Précédent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-ponyta" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+
+
+
+
+
+
+
+    </div>
+   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+   <script>
+       // Fonction de recherche de Pokémon
+       const searchBar = document.querySelector('.search-bar');
+       const searchButton = document.querySelector('.search-button');
+       const pokemonSections = document.querySelectorAll('.moncontainer section');
+
+       // Fonction pour normaliser le texte (enlever les accents et mettre en minuscules)
+       function normalizeText(text) {
+           return text.normalize('NFD')
+                     .replace(/[\u0300-\u036f]/g, '')
+                     .toLowerCase();
+       }
+
+       // Fonction pour filtrer les Pokémons
+       function searchPokemon() {
+           const searchTerm = normalizeText(searchBar.value.trim());
+           
+           pokemonSections.forEach(section => {
+               const pokemonName = section.querySelector('.pokemon-name');
+               const pokemonNumber = section.querySelector('.pokemon-number');
+               
+               if (pokemonName && pokemonNumber) {
+                   const name = normalizeText(pokemonName.textContent);
+                   const number = pokemonNumber.textContent.trim();
+                   
+                   // Vérifier si le terme de recherche correspond au nom ou au numéro
+                   if (searchTerm === '' || name.includes(searchTerm) || number.includes(searchTerm)) {
+                       section.style.display = 'flex';
+                       // Animation d'apparition
+                       section.style.animation = 'fadeIn 0.3s ease-in';
+                   } else {
+                       section.style.display = 'none';
+                   }
+               }
+           });
+
+           // Afficher un message si aucun Pokémon n'est trouvé
+           const visiblePokemons = Array.from(pokemonSections).filter(section => section.style.display !== 'none');
+           
+           // Supprimer l'ancien message s'il existe
+           const oldMessage = document.querySelector('.no-results-message');
+           if (oldMessage) {
+               oldMessage.remove();
+           }
+
+           if (visiblePokemons.length === 0 && searchTerm !== '') {
+               const message = document.createElement('div');
+               message.className = 'no-results-message';
+               message.style.cssText = 'text-align: center; padding: 40px; font-size: 1.2em; color: #666; grid-column: 1 / -1;';
+               message.innerHTML = `
+                   <p>😢 Aucun Pokémon trouvé pour "<strong>${searchBar.value}</strong>"</p>
+                   <p style="font-size: 0.9em; margin-top: 10px;">Essayez avec un autre nom ou numéro !</p>
+               `;
+               document.querySelector('.moncontainer').appendChild(message);
+           }
+       }
+
+       // Recherche en temps réel (au fur et à mesure de la frappe)
+       searchBar.addEventListener('input', searchPokemon);
+
+       // Recherche au clic sur le bouton
+       searchButton.addEventListener('click', searchPokemon);
+
+       // Recherche avec la touche Entrée
+       searchBar.addEventListener('keypress', function(e) {
+           if (e.key === 'Enter') {
+               searchPokemon();
+           }
+       });
+
+       // Animation CSS pour l'apparition
+       const style = document.createElement('style');
+       style.textContent = `
+           @keyframes fadeIn {
+               from {
+                   opacity: 0;
+                   transform: translateY(10px);
+               }
+               to {
+                   opacity: 1;
+                   transform: translateY(0);
+               }
+           }
+       `;
+       document.head.appendChild(style);
+   </script>
+</body>
+</html>
+
+
