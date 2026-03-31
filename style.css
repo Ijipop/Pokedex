@@ -118,8 +118,8 @@ footer.contact a:hover {
 
 .moncontainer {
     display: grid;
-    gap: 20px;
-    padding: 20px;
+    gap: 16px;
+    padding: 16px;
 }
 
 /* 1 colonne < 768px */
@@ -137,7 +137,7 @@ footer.contact a:hover {
 /* Grands écrans (≥ 1200px) */
 @media screen and (min-width: 1200px) {
     .moncontainer {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
@@ -211,10 +211,10 @@ footer.contact a:hover {
 section {
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     cursor: pointer;
-    margin: 10px;
+    margin: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,7 +239,7 @@ section:hover {
 img {
     width: 100%;
     height: auto;
-    max-width: 250px;
+    max-width: 210px;
     border-radius: 8px;
     display: block;
     margin: 0 auto;
@@ -323,7 +323,7 @@ img {
 }
 
 .pokemon-name {
-    font-size: 1.5em;
+    font-size: 1.35em;
     margin: 5px 0;
     color: rgb(0, 0, 0);
     font-family: 'Poppins', sans-serif;
@@ -403,6 +403,38 @@ img {
     background-color: #A890F0;
     color: white;
 }
+.type-psy {
+    background-color: #F85888;
+    color: white;
+}
+.type-combat {
+    background-color: #C03028;
+    color: white;
+}
+.type-roche {
+    background-color: #B8A038;
+    color: white;
+}
+.type-spectre {
+    background-color: #705898;
+    color: white;
+}
+.type-glace {
+    background-color: #98D8D8;
+    color: black;
+}
+.type-dragon {
+    background-color: #7038F8;
+    color: white;
+}
+.type-tenebres {
+    background-color: #705848;
+    color: white;
+}
+.type-acier {
+    background-color: #B8B8D0;
+    color: black;
+}
 /* Style pour la barre de recherche */
 .search-container {
     margin: 20px auto;
@@ -433,7 +465,8 @@ img {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.search-button {
+.search-button,
+.type-filter-button {
     background-color: #F8D030;
     border: none;
     padding: 12px 25px;
@@ -445,9 +478,47 @@ img {
     transition: all 0.3s ease;
 }
 
-.search-button:hover {
+.search-button:hover,
+.type-filter-button:hover {
     background-color: #ffd700;
     transform: translateY(-2px);
+}
+
+.type-filter-dropdown .type-filter-button {
+    min-width: 170px;
+}
+
+.type-filter-menu {
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.type-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.type-pill {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.type-pill-all {
+    background: conic-gradient(
+        #3CAF50,
+        #ff4444,
+        #3498db,
+        #A040A0,
+        #F8D030,
+        #EE99AC,
+        #A890F0,
+        #3CAF50
+    );
 }
 
 /* Ajustement pour mobile */
@@ -457,7 +528,9 @@ img {
         padding: 0 20px;
     }
     
-    .search-button {
+    .search-button,
+    .type-filter-button,
+    .type-filter-dropdown .type-filter-button {
         width: 100%;
     }
 }

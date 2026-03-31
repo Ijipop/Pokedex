@@ -15,7 +15,19 @@
         <h2>Découvrez les Pokémons et leurs types à travers une galerie interactive</h2>
         <div class="search-container">
             <input type="text" class="search-bar" placeholder="Rechercher un Pokémon...">
-            <button class="search-button">Rechercher</button>
+            <div class="dropdown type-filter-dropdown">
+                <button class="type-filter-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Type: Tous
+                </button>
+                <ul class="dropdown-menu type-filter-menu" id="typeFilterMenu">
+                    <li>
+                        <button class="dropdown-item type-filter-item active" type="button" data-type="all">
+                            <span class="type-pill type-pill-all"></span>
+                            Tous les types
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 
@@ -41,7 +53,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/salameche.png" alt="salameche">
+            <img src="pokepics/salameche.png" alt="salameche">
         </section>
 
         <section class="pokemon3">
@@ -53,7 +65,7 @@
                     Évolution
                 </button>   
             </div>
-            <img src="/pokepics/carapuce.png" alt="carapuce">
+            <img src="pokepics/carapuce.png" alt="carapuce">
         </section>
 
         <section class="pokemon4">  
@@ -65,7 +77,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/aspicot.png" alt="aspicot">
+            <img src="pokepics/aspicot.png" alt="aspicot">
         </section>
 
         <section class="pokemon5">
@@ -77,7 +89,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/rattata.png" alt="rattata">
+            <img src="pokepics/rattata.png" alt="rattata">
         </section>  
         
         <section class="pokemon6">
@@ -89,7 +101,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/pikachu.png" alt="pikachu">
+            <img src="pokepics/pikachu.png" alt="pikachu">
         </section>
 
         <section class="pokemon7">
@@ -101,7 +113,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/goupix.png" alt="goupix">
+            <img src="pokepics/goupix.png" alt="goupix">
         </section>
 
         <section class="pokemon8">
@@ -113,7 +125,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/rondoudou.png" alt="rondoudou">
+            <img src="pokepics/rondoudou.png" alt="rondoudou">
         </section>
 
         <section class="pokemon9">
@@ -125,7 +137,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/mimitoss.png" alt="mimitoss">
+            <img src="pokepics/mimitoss.png" alt="mimitoss">
         </section>
 
         <section class="pokemon10">
@@ -137,7 +149,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/taupiqueur.png" alt="taupiqueur">
+            <img src="pokepics/taupiqueur.png" alt="taupiqueur">
         </section>
         
         <section class="pokemon11">
@@ -149,7 +161,7 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/psykokwak.png" alt="psykokwak">
+            <img src="pokepics/psykokwak.png" alt="psykokwak">
         </section>
         
         <section class="pokemon12">
@@ -161,7 +173,127 @@
                     Évolution
                 </button>
             </div>
-            <img src="/pokepics/ponyta.png" alt="ponyta">
+            <img src="pokepics/ponyta.png" alt="ponyta">
+        </section>
+
+        <section class="pokemon13">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#052</span>
+                <h3 class="pokemon-name">Miaouss</h3>
+                <span class="pokemon-type">Type: <span class="type-normal">Normal</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-miaouss">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png" alt="miaouss">
+        </section>
+
+        <section class="pokemon14">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#058</span>
+                <h3 class="pokemon-name">Caninos</h3>
+                <span class="pokemon-type">Type: <span class="type-feu">Feu</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-caninos">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/58.png" alt="caninos">
+        </section>
+
+        <section class="pokemon15">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#060</span>
+                <h3 class="pokemon-name">Ptitard</h3>
+                <span class="pokemon-type">Type: <span class="type-eau">Eau</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-ptitard">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/60.png" alt="ptitard">
+        </section>
+
+        <section class="pokemon16">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#063</span>
+                <h3 class="pokemon-name">Abra</h3>
+                <span class="pokemon-type">Type: <span class="type-poison">Psy</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-abra">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png" alt="abra">
+        </section>
+
+        <section class="pokemon17">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#066</span>
+                <h3 class="pokemon-name">Machoc</h3>
+                <span class="pokemon-type">Type: <span class="type-sol">Combat</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-machoc">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png" alt="machoc">
+        </section>
+
+        <section class="pokemon18">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#074</span>
+                <h3 class="pokemon-name">Racaillou</h3>
+                <span class="pokemon-type">Type: <span class="type-sol">Roche</span>/<span class="type-sol">Sol</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-racaillou">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/74.png" alt="racaillou">
+        </section>
+
+        <section class="pokemon19">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#079</span>
+                <h3 class="pokemon-name">Ramoloss</h3>
+                <span class="pokemon-type">Type: <span class="type-eau">Eau</span>/<span class="type-poison">Psy</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-ramoloss">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/79.png" alt="ramoloss">
+        </section>
+
+        <section class="pokemon20">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#092</span>
+                <h3 class="pokemon-name">Fantominus</h3>
+                <span class="pokemon-type">Type: <span class="type-poison">Spectre</span>/<span class="type-poison">Poison</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-fantominus">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/92.png" alt="fantominus">
+        </section>
+
+        <section class="pokemon21">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#129</span>
+                <h3 class="pokemon-name">Magicarpe</h3>
+                <span class="pokemon-type">Type: <span class="type-eau">Eau</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-magicarpe">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png" alt="magicarpe">
+        </section>
+
+        <section class="pokemon22">
+            <div class="pokemon-info">
+                <span class="pokemon-number">#133</span>
+                <h3 class="pokemon-name">Evoli</h3>
+                <span class="pokemon-type">Type: <span class="type-normal">Normal</span></span>
+                <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#evolution-evoli">
+                    Évolution
+                </button>
+            </div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="evoli">
         </section>
     </div>
 
@@ -171,7 +303,7 @@
             <p><a href="mailto:jfthebeanz@hotmail.com">Envoyer moi un mail.</a></p>
             <p>Téléphone : 1-800-POKEMON</p>   
             <p>À propos :</p>
-            <p>Ce site est à l'attention des fans de Pokémon dont le plus grand fan est Ahmed Imed Eddine Rabbah</p>
+            <p>Ce site à été créé dans le cadre d'un cours.</p>
         </div>
         <p>&copy; 2025 Pokedex de Jean-François Lefebvre. Tous droits réservés.</p>
     </footer>
@@ -822,47 +954,437 @@
                 </div>
             </div>           
         </div>
-    
 
+        <div class="modal fade" id="evolution-miaouss" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Miaouss</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-miaouss" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png" class="d-block w-100" alt="Miaouss">
+                                        <span class="pokemon-number">#052</span>
+                                        <h4 class="pokemon-name">Miaouss</h4>
+                                        <p class="pokemon-type">Type: <span class="type-normal">Normal</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png" class="d-block w-100" alt="Persian">
+                                        <span class="pokemon-number">#053</span>
+                                        <h4 class="pokemon-name">Persian</h4>
+                                        <p class="pokemon-type">Type: <span class="type-normal">Normal</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-miaouss" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-miaouss" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="evolution-caninos" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Caninos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-caninos" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/58.png" class="d-block w-100" alt="Caninos">
+                                        <span class="pokemon-number">#058</span>
+                                        <h4 class="pokemon-name">Caninos</h4>
+                                        <p class="pokemon-type">Type: <span class="type-feu">Feu</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png" class="d-block w-100" alt="Arcanin">
+                                        <span class="pokemon-number">#059</span>
+                                        <h4 class="pokemon-name">Arcanin</h4>
+                                        <p class="pokemon-type">Type: <span class="type-feu">Feu</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-caninos" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-caninos" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="evolution-ptitard" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Ptitard</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-ptitard" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/60.png" class="d-block w-100" alt="Ptitard">
+                                        <span class="pokemon-number">#060</span>
+                                        <h4 class="pokemon-name">Ptitard</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/61.png" class="d-block w-100" alt="Tetarte">
+                                        <span class="pokemon-number">#061</span>
+                                        <h4 class="pokemon-name">Têtarte</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/62.png" class="d-block w-100" alt="Tartard">
+                                        <span class="pokemon-number">#062</span>
+                                        <h4 class="pokemon-name">Tartard</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span> / <span class="type-sol">Combat</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-ptitard" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-ptitard" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="evolution-abra" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Abra</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-abra" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png" class="d-block w-100" alt="Abra">
+                                        <span class="pokemon-number">#063</span>
+                                        <h4 class="pokemon-name">Abra</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Psy</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/64.png" class="d-block w-100" alt="Kadabra">
+                                        <span class="pokemon-number">#064</span>
+                                        <h4 class="pokemon-name">Kadabra</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Psy</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png" class="d-block w-100" alt="Alakazam">
+                                        <span class="pokemon-number">#065</span>
+                                        <h4 class="pokemon-name">Alakazam</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Psy</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-abra" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-abra" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="evolution-machoc" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Machoc</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-machoc" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png" class="d-block w-100" alt="Machoc">
+                                        <span class="pokemon-number">#066</span>
+                                        <h4 class="pokemon-name">Machoc</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Combat</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png" class="d-block w-100" alt="Machopeur">
+                                        <span class="pokemon-number">#067</span>
+                                        <h4 class="pokemon-name">Machopeur</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Combat</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png" class="d-block w-100" alt="Mackogneur">
+                                        <span class="pokemon-number">#068</span>
+                                        <h4 class="pokemon-name">Mackogneur</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Combat</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-machoc" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-machoc" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="evolution-racaillou" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Racaillou</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-racaillou" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/74.png" class="d-block w-100" alt="Racaillou">
+                                        <span class="pokemon-number">#074</span>
+                                        <h4 class="pokemon-name">Racaillou</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Roche</span> / <span class="type-sol">Sol</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/75.png" class="d-block w-100" alt="Gravalanch">
+                                        <span class="pokemon-number">#075</span>
+                                        <h4 class="pokemon-name">Gravalanch</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Roche</span> / <span class="type-sol">Sol</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/76.png" class="d-block w-100" alt="Grolem">
+                                        <span class="pokemon-number">#076</span>
+                                        <h4 class="pokemon-name">Grolem</h4>
+                                        <p class="pokemon-type">Type: <span class="type-sol">Roche</span> / <span class="type-sol">Sol</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-racaillou" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-racaillou" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="evolution-ramoloss" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Ramoloss</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-ramoloss" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/79.png" class="d-block w-100" alt="Ramoloss">
+                                        <span class="pokemon-number">#079</span>
+                                        <h4 class="pokemon-name">Ramoloss</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span> / <span class="type-poison">Psy</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/80.png" class="d-block w-100" alt="Flagadoss">
+                                        <span class="pokemon-number">#080</span>
+                                        <h4 class="pokemon-name">Flagadoss</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span> / <span class="type-poison">Psy</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-ramoloss" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-ramoloss" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="evolution-fantominus" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Fantominus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-fantominus" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/92.png" class="d-block w-100" alt="Fantominus">
+                                        <span class="pokemon-number">#092</span>
+                                        <h4 class="pokemon-name">Fantominus</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Spectre</span> / <span class="type-poison">Poison</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/93.png" class="d-block w-100" alt="Spectrum">
+                                        <span class="pokemon-number">#093</span>
+                                        <h4 class="pokemon-name">Spectrum</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Spectre</span> / <span class="type-poison">Poison</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" class="d-block w-100" alt="Ectoplasma">
+                                        <span class="pokemon-number">#094</span>
+                                        <h4 class="pokemon-name">Ectoplasma</h4>
+                                        <p class="pokemon-type">Type: <span class="type-poison">Spectre</span> / <span class="type-poison">Poison</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-fantominus" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-fantominus" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="evolution-magicarpe" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Magicarpe</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-magicarpe" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png" class="d-block w-100" alt="Magicarpe">
+                                        <span class="pokemon-number">#129</span>
+                                        <h4 class="pokemon-name">Magicarpe</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png" class="d-block w-100" alt="Leviator">
+                                        <span class="pokemon-number">#130</span>
+                                        <h4 class="pokemon-name">Leviator</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span> / <span class="type-vol">Vol</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-magicarpe" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-magicarpe" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="evolution-evoli" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Évolution de Evoli</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pokemon-card shiny-glow">
+                            <div id="evolutionCarousel-evoli" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" class="d-block w-100" alt="Evoli">
+                                        <span class="pokemon-number">#133</span>
+                                        <h4 class="pokemon-name">Evoli</h4>
+                                        <p class="pokemon-type">Type: <span class="type-normal">Normal</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png" class="d-block w-100" alt="Aquali">
+                                        <span class="pokemon-number">#134</span>
+                                        <h4 class="pokemon-name">Aquali</h4>
+                                        <p class="pokemon-type">Type: <span class="type-eau">Eau</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png" class="d-block w-100" alt="Voltali">
+                                        <span class="pokemon-number">#135</span>
+                                        <h4 class="pokemon-name">Voltali</h4>
+                                        <p class="pokemon-type">Type: <span class="type-electrique">Électrique</span></p>
+                                    </div>
+                                    <div class="carousel-item text-center">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png" class="d-block w-100" alt="Pyroli">
+                                        <span class="pokemon-number">#136</span>
+                                        <h4 class="pokemon-name">Pyroli</h4>
+                                        <p class="pokemon-type">Type: <span class="type-feu">Feu</span></p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-evoli" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-evoli" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
    
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
    
    <script>
-       // Fonction de recherche de Pokémon
        const searchBar = document.querySelector('.search-bar');
-       const searchButton = document.querySelector('.search-button');
-       const pokemonSections = document.querySelectorAll('.moncontainer section');
+       const moncontainer = document.querySelector('.moncontainer');
+       const typeFilterButton = document.querySelector('.type-filter-button');
+       const typeFilterMenu = document.querySelector('#typeFilterMenu');
+       const evolutionCache = new Map();
+       const pokemonDetailsCache = new Map();
+       let activeTypeClass = 'all';
+       const TYPE_CONFIG = {
+           grass: { label: 'Plante', className: 'type-plante', color: '#3CAF50' },
+           poison: { label: 'Poison', className: 'type-poison', color: '#A040A0' },
+           fire: { label: 'Feu', className: 'type-feu', color: '#ff4444' },
+           water: { label: 'Eau', className: 'type-eau', color: '#3498db' },
+           bug: { label: 'Insecte', className: 'type-insecte', color: '#A8B820' },
+           normal: { label: 'Normal', className: 'type-normal', color: '#A8A878' },
+           electric: { label: 'Électrique', className: 'type-electrique', color: '#F8D030' },
+           fairy: { label: 'Fée', className: 'type-fee', color: '#EE99AC' },
+           ground: { label: 'Sol', className: 'type-sol', color: '#E0C068' },
+           flying: { label: 'Vol', className: 'type-vol', color: '#A890F0' },
+           psychic: { label: 'Psy', className: 'type-psy', color: '#F85888' },
+           fighting: { label: 'Combat', className: 'type-combat', color: '#C03028' },
+           rock: { label: 'Roche', className: 'type-roche', color: '#B8A038' },
+           ghost: { label: 'Spectre', className: 'type-spectre', color: '#705898' },
+           ice: { label: 'Glace', className: 'type-glace', color: '#98D8D8' },
+           dragon: { label: 'Dragon', className: 'type-dragon', color: '#7038F8' },
+           dark: { label: 'Ténèbres', className: 'type-tenebres', color: '#705848' },
+           steel: { label: 'Acier', className: 'type-acier', color: '#B8B8D0' }
+       };
 
-       // Fonction pour normaliser le texte (enlever les accents et mettre en minuscules)
        function normalizeText(text) {
-           return text.normalize('NFD')
-                     .replace(/[\u0300-\u036f]/g, '')
-                     .toLowerCase();
+           return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
        }
 
-       // Fonction pour filtrer les Pokémons
+       function cardMatchesType(section) {
+           if (activeTypeClass === 'all') return true;
+           return Boolean(section.querySelector(`.pokemon-type .${activeTypeClass}`));
+       }
+
        function searchPokemon() {
            const searchTerm = normalizeText(searchBar.value.trim());
-           
+           const pokemonSections = document.querySelectorAll('.moncontainer section');
+
            pokemonSections.forEach(section => {
                const pokemonName = section.querySelector('.pokemon-name');
                const pokemonNumber = section.querySelector('.pokemon-number');
-               
+
                if (pokemonName && pokemonNumber) {
                    const name = normalizeText(pokemonName.textContent);
                    const number = pokemonNumber.textContent.trim();
-                   
-                   // Vérifier si le terme de recherche correspond au nom ou au numéro
-                   if (searchTerm === '' || name.includes(searchTerm) || number.includes(searchTerm)) {
+
+                   const textMatch = searchTerm === '' || name.includes(searchTerm) || number.includes(searchTerm);
+                   const typeMatch = cardMatchesType(section);
+                   if (textMatch && typeMatch) {
                        section.style.display = 'flex';
-                       // Animation d'apparition
                        section.style.animation = 'fadeIn 0.3s ease-in';
                    } else {
                        section.style.display = 'none';
@@ -870,55 +1392,290 @@
                }
            });
 
-           // Afficher un message si aucun Pokémon n'est trouvé
            const visiblePokemons = Array.from(pokemonSections).filter(section => section.style.display !== 'none');
-           
-           // Supprimer l'ancien message s'il existe
            const oldMessage = document.querySelector('.no-results-message');
-           if (oldMessage) {
-               oldMessage.remove();
-           }
+           if (oldMessage) oldMessage.remove();
 
-           if (visiblePokemons.length === 0 && searchTerm !== '') {
+           if (visiblePokemons.length === 0 && (searchTerm !== '' || activeTypeClass !== 'all')) {
                const message = document.createElement('div');
                message.className = 'no-results-message';
                message.style.cssText = 'text-align: center; padding: 40px; font-size: 1.2em; color: #666; grid-column: 1 / -1;';
                message.innerHTML = `
-                   <p>😢 Aucun Pokémon trouvé pour "<strong>${searchBar.value}</strong>"</p>
+                   <p>😢 Aucun Pokémon trouvé avec ce filtre.</p>
                    <p style="font-size: 0.9em; margin-top: 10px;">Essayez avec un autre nom ou numéro !</p>
                `;
-               document.querySelector('.moncontainer').appendChild(message);
+               moncontainer.appendChild(message);
            }
        }
 
-       // Recherche en temps réel (au fur et à mesure de la frappe)
-       searchBar.addEventListener('input', searchPokemon);
+       function buildTypeFilterMenu() {
+           const sortedTypes = Object.values(TYPE_CONFIG).sort((a, b) => a.label.localeCompare(b.label, 'fr'));
+           const itemsHtml = sortedTypes.map(type => `
+               <li>
+                   <button class="dropdown-item type-filter-item" type="button" data-type="${type.className}">
+                       <span class="type-pill" style="background-color: ${type.color};"></span>
+                       ${type.label}
+                   </button>
+               </li>
+           `).join('');
 
-       // Recherche au clic sur le bouton
-       searchButton.addEventListener('click', searchPokemon);
+           typeFilterMenu.insertAdjacentHTML('beforeend', itemsHtml);
 
-       // Recherche avec la touche Entrée
-       searchBar.addEventListener('keypress', function(e) {
-           if (e.key === 'Enter') {
-               searchPokemon();
+           typeFilterMenu.querySelectorAll('.type-filter-item').forEach(item => {
+               item.addEventListener('click', () => {
+                   activeTypeClass = item.dataset.type;
+                   typeFilterMenu.querySelectorAll('.type-filter-item').forEach(btn => btn.classList.remove('active'));
+                   item.classList.add('active');
+                   typeFilterButton.textContent = activeTypeClass === 'all' ? 'Type: Tous' : `Type: ${item.textContent.trim()}`;
+                   searchPokemon();
+               });
+           });
+       }
+
+       function getPokemonIdFromUrl(url) {
+           const match = url.match(/\/pokemon\/(\d+)\/?$/);
+           return match ? Number(match[1]) : null;
+       }
+
+       function formatNumber(id) {
+           return `#${String(id).padStart(3, '0')}`;
+       }
+
+       function toDisplayName(name) {
+           return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, ' ');
+       }
+
+       async function fetchJsonWithRetry(url, retries = 2, delayMs = 350) {
+           let lastError;
+           for (let attempt = 0; attempt <= retries; attempt++) {
+               try {
+                   const response = await fetch(url);
+                   if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                   return await response.json();
+               } catch (error) {
+                   lastError = error;
+                   if (attempt < retries) {
+                       await new Promise(resolve => setTimeout(resolve, delayMs * (attempt + 1)));
+                   }
+               }
            }
+           throw lastError;
+       }
+
+       function getTypeConfig(typeName) {
+           return TYPE_CONFIG[typeName] || { label: toDisplayName(typeName), className: 'type-normal', color: '#A8A878' };
+       }
+
+       function renderTypeBadges(typeNames) {
+           return typeNames
+               .map(typeName => {
+                   const type = getTypeConfig(typeName);
+                   return `<span class="${type.className}">${type.label}</span>`;
+               })
+               .join(' / ');
+       }
+
+       async function loadPokemonDetails(nameOrId) {
+           const cacheKey = String(nameOrId);
+           if (pokemonDetailsCache.has(cacheKey)) return pokemonDetailsCache.get(cacheKey);
+
+           const data = await fetchJsonWithRetry(`https://pokeapi.co/api/v2/pokemon/${nameOrId}`);
+           const details = {
+               id: data.id,
+               name: toDisplayName(data.name),
+               types: data.types.map(t => t.type.name)
+           };
+           pokemonDetailsCache.set(cacheKey, details);
+           pokemonDetailsCache.set(String(details.id), details);
+           pokemonDetailsCache.set(data.name, details);
+           return details;
+       }
+
+       function ensureDynamicEvolutionModal() {
+           let modal = document.getElementById('evolution-dynamic');
+           if (modal) return modal;
+
+           modal = document.createElement('div');
+           modal.className = 'modal fade';
+           modal.id = 'evolution-dynamic';
+           modal.tabIndex = -1;
+           modal.setAttribute('aria-hidden', 'true');
+           modal.innerHTML = `
+               <div class="modal-dialog modal-dialog-centered">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="dynamicEvolutionTitle">Évolution</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                       </div>
+                       <div class="modal-body" id="dynamicEvolutionBody">
+                           <p class="text-center m-0">Chargement...</p>
+                       </div>
+                   </div>
+               </div>
+           `;
+           document.body.appendChild(modal);
+           return modal;
+       }
+
+       function flattenEvolutionChain(chainNode, output = []) {
+           if (!chainNode) return output;
+           output.push(chainNode.species.name);
+           chainNode.evolves_to.forEach(child => flattenEvolutionChain(child, output));
+           return output;
+       }
+
+       async function loadEvolutionData(pokemonName) {
+           if (evolutionCache.has(pokemonName)) return evolutionCache.get(pokemonName);
+
+           const speciesData = await fetchJsonWithRetry(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`);
+           const chainData = await fetchJsonWithRetry(speciesData.evolution_chain.url);
+
+           const names = [...new Set(flattenEvolutionChain(chainData.chain))];
+           const details = await Promise.all(names.map(name => loadPokemonDetails(name)));
+
+           evolutionCache.set(pokemonName, details);
+           return details;
+       }
+
+       async function openEvolutionModal(pokemonName, displayName) {
+           const modalEl = ensureDynamicEvolutionModal();
+           const title = modalEl.querySelector('#dynamicEvolutionTitle');
+           const body = modalEl.querySelector('#dynamicEvolutionBody');
+           title.textContent = `Évolution de ${displayName}`;
+           body.innerHTML = '<p class="text-center m-0">Chargement...</p>';
+
+           const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+           modal.show();
+
+           try {
+               const evolutionList = await loadEvolutionData(pokemonName);
+               const slides = evolutionList.map((pokemon, index) => `
+                   <div class="carousel-item ${index === 0 ? 'active' : ''} text-center">
+                       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" class="d-block w-100" alt="${pokemon.name}">
+                       <span class="pokemon-number">${formatNumber(pokemon.id)}</span>
+                       <h4 class="pokemon-name">${pokemon.name}</h4>
+                       <p class="pokemon-type">Type: ${renderTypeBadges(pokemon.types)}</p>
+                   </div>
+               `).join('');
+
+               body.innerHTML = `
+                   <div class="pokemon-card shiny-glow">
+                       <div id="evolutionCarousel-dynamic" class="carousel slide">
+                           <div class="carousel-inner">${slides}</div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#evolutionCarousel-dynamic" data-bs-slide="prev">
+                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                               <span class="visually-hidden">Précédent</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#evolutionCarousel-dynamic" data-bs-slide="next">
+                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                               <span class="visually-hidden">Suivant</span>
+                           </button>
+                       </div>
+                   </div>
+               `;
+           } catch (error) {
+               body.innerHTML = '<p class="text-center text-danger m-0">Oups, cette évolution n\'est pas disponible pour le moment. Réessaie dans un instant.</p>';
+           }
+       }
+
+       async function applyCardTypeStyle(section, pokemonName) {
+           try {
+               const pokemon = await loadPokemonDetails(pokemonName);
+               const primaryType = getTypeConfig(pokemon.types[0]);
+               section.style.borderLeft = `4px solid ${primaryType.color}`;
+               const typeContainer = section.querySelector('.pokemon-type');
+               typeContainer.innerHTML = `Type: ${renderTypeBadges(pokemon.types)}`;
+           } catch (error) {
+               section.style.borderLeft = '4px solid #A8A878';
+           }
+       }
+
+       function createDynamicCard(id, name) {
+           const section = document.createElement('section');
+           section.className = `pokemon${id}`;
+           const displayName = toDisplayName(name);
+           section.innerHTML = `
+               <div class="pokemon-info">
+                   <span class="pokemon-number">${formatNumber(id)}</span>
+                   <h3 class="pokemon-name">${displayName}</h3>
+                   <span class="pokemon-type">Type: <span class="type-normal">Chargement...</span></span>
+                   <button class="btn btn-success mt-2">Évolution</button>
+               </div>
+               <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${displayName.toLowerCase()}" loading="lazy">
+           `;
+
+           const button = section.querySelector('button');
+           button.addEventListener('click', () => openEvolutionModal(name, displayName));
+           applyCardTypeStyle(section, name);
+           return section;
+       }
+
+       async function styleExistingCardsWithoutTypeBorder() {
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           const tasks = sections.map(async section => {
+               const numberEl = section.querySelector('.pokemon-number');
+               if (!numberEl) return;
+
+               const id = Number(numberEl.textContent.replace('#', '').trim());
+               if (!Number.isFinite(id)) return;
+
+               const computed = window.getComputedStyle(section);
+               const hasBorder = Number.parseFloat(computed.borderLeftWidth) > 0;
+               if (hasBorder) return;
+
+               await applyCardTypeStyle(section, id);
+           });
+
+           await Promise.allSettled(tasks);
+       }
+
+       async function addAllMissingPokemon() {
+           const existingIds = new Set(
+               Array.from(document.querySelectorAll('.moncontainer .pokemon-number'))
+                   .map(el => Number(el.textContent.replace('#', '').trim()))
+                   .filter(Number.isFinite)
+           );
+
+           const listData = await fetchJsonWithRetry('https://pokeapi.co/api/v2/pokemon?limit=2000');
+           const missing = listData.results
+               .map(p => ({ id: getPokemonIdFromUrl(p.url), name: p.name }))
+               .filter(p => p.id && !existingIds.has(p.id));
+
+           const chunkSize = 60;
+           for (let i = 0; i < missing.length; i += chunkSize) {
+               const chunk = missing.slice(i, i + chunkSize);
+               const fragment = document.createDocumentFragment();
+               chunk.forEach(p => fragment.appendChild(createDynamicCard(p.id, p.name)));
+               moncontainer.appendChild(fragment);
+               searchPokemon();
+               await new Promise(resolve => requestAnimationFrame(resolve));
+           }
+       }
+
+       searchBar.addEventListener('input', searchPokemon);
+       searchBar.addEventListener('keypress', function(e) {
+           if (e.key === 'Enter') searchPokemon();
        });
 
-       // Animation CSS pour l'apparition
        const style = document.createElement('style');
        style.textContent = `
            @keyframes fadeIn {
-               from {
-                   opacity: 0;
-                   transform: translateY(10px);
-               }
-               to {
-                   opacity: 1;
-                   transform: translateY(0);
-               }
+               from { opacity: 0; transform: translateY(10px); }
+               to { opacity: 1; transform: translateY(0); }
            }
        `;
        document.head.appendChild(style);
+
+       buildTypeFilterMenu();
+       styleExistingCardsWithoutTypeBorder();
+
+       addAllMissingPokemon().catch(() => {
+           const message = document.createElement('div');
+           message.className = 'no-results-message';
+           message.style.cssText = 'text-align: center; padding: 20px; color: #b00; grid-column: 1 / -1;';
+           message.textContent = 'Le Pokédex prend un peu plus de temps à se charger. Réessaie dans un instant.';
+           moncontainer.appendChild(message);
+       });
    </script>
 </body>
 </html>
