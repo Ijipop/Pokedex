@@ -1362,41 +1362,6 @@
        const pageInfo = document.getElementById('pageInfo');
        const evolutionCache = new Map();
        const pokemonDetailsCache = new Map();
-       /** id (string) → type principal PokéAPI (ex. "grass"), depuis pokemon-primary-types.json */
-       let primaryTypeById = {};
-
-       async function loadPrimaryTypeMap() {
-           try {
-               const res = await fetch('pokemon-primary-types.json');
-               if (res.ok) {
-                   const data = await res.json();
-                   primaryTypeById = data && typeof data === 'object' ? data : {};
-               }
-           } catch (e) {
-               primaryTypeById = {};
-           }
-       }
-
-       function typeRowNeedsApiRefresh(section, typeRow) {
-           if (!typeRow) return false;
-           return (
-               typeRow.textContent.includes('Chargement') ||
-               section.dataset.pendingFullTypes === '1'
-           );
-       }
-
-       /** Style synchrone depuis la carte locale ; l’API complétera ensuite (2e type, etc.). */
-       function applyLocalPrimaryTypeToCard(section, id) {
-           if (!primaryTypeById || typeof primaryTypeById !== 'object') return;
-           const typeName = primaryTypeById[String(id)];
-           if (!typeName) return;
-           const typeContainer = section.querySelector('.pokemon-type');
-           if (!typeContainer || !typeContainer.textContent.includes('Chargement')) return;
-           const primaryType = getTypeConfig(typeName);
-           section.style.borderLeft = `4px solid ${primaryType.color}`;
-           typeContainer.innerHTML = `Type: ${renderTypeBadges([typeName])}`;
-           section.dataset.pendingFullTypes = '1';
-       }
        let activeTypeClass = 'all';
        const PAGE_SIZE = 100;
        let currentPage = 1;
@@ -1530,84 +1495,6 @@
            }
 
            syncPaginationUI(matchCount, totalPages);
-           prioritizeVisibleCardStyles();
-       }
-
-       function getVisiblePokemonSections() {
-           const sections = Array.from(moncontainer.querySelectorAll('section'));
-           const matched = sections.filter(sectionMatchesSearchAndType);
-           const start = (currentPage - 1) * PAGE_SIZE;
-           return new Set(matched.slice(start, start + PAGE_SIZE));
-       }
-
-       function isSectionStyleVisible(section) {
-           return getVisiblePokemonSections().has(section);
-       }
-
-       const CARD_STYLE_CONCURRENCY = 5;
-       let cardStyleActive = 0;
-       const cardStyleWaitQueue = [];
-       let cardStyleJobSeq = 0;
-
-       function removeCardStyleJobsForSection(section) {
-           for (let i = cardStyleWaitQueue.length - 1; i >= 0; i--) {
-               if (cardStyleWaitQueue[i].section === section) {
-                   cardStyleWaitQueue.splice(i, 1);
-               }
-           }
-       }
-
-       function enqueueCardTypeStyle(section, pokemonNameOrId, priorityOverride) {
-           removeCardStyleJobsForSection(section);
-           const priority =
-               priorityOverride !== undefined
-                   ? priorityOverride
-                   : isSectionStyleVisible(section)
-                     ? 0
-                     : 1;
-           cardStyleWaitQueue.push({
-               section,
-               pokemonNameOrId,
-               priority,
-               seq: cardStyleJobSeq++
-           });
-           cardStyleWaitQueue.sort((a, b) => a.priority - b.priority || a.seq - b.seq);
-           pumpCardStyleQueue();
-       }
-
-       function pumpCardStyleQueue() {
-           while (cardStyleActive < CARD_STYLE_CONCURRENCY && cardStyleWaitQueue.length > 0) {
-               const job = cardStyleWaitQueue.shift();
-               cardStyleActive++;
-               applyCardTypeStyle(job.section, job.pokemonNameOrId).finally(() => {
-                   cardStyleActive--;
-                   pumpCardStyleQueue();
-               });
-           }
-       }
-
-       function prioritizeVisibleCardStyles() {
-           for (const section of getVisiblePokemonSections()) {
-               const typeRow = section.querySelector('.pokemon-type');
-               if (!typeRow || !typeRowNeedsApiRefresh(section, typeRow)) continue;
-               const numEl = section.querySelector('.pokemon-number');
-               if (!numEl) continue;
-               const id = Number(numEl.textContent.replace('#', '').trim());
-               if (!Number.isFinite(id)) continue;
-               enqueueCardTypeStyle(section, id, 0);
-           }
-       }
-
-       function retryCardStylesStillLoading() {
-           moncontainer.querySelectorAll('section').forEach(section => {
-               const typeRow = section.querySelector('.pokemon-type');
-               if (!typeRow || !typeRowNeedsApiRefresh(section, typeRow)) return;
-               const numEl = section.querySelector('.pokemon-number');
-               if (!numEl) return;
-               const id = Number(numEl.textContent.replace('#', '').trim());
-               if (!Number.isFinite(id)) return;
-               enqueueCardTypeStyle(section, id, isSectionStyleVisible(section) ? 0 : 1);
-           });
        }
 
        function buildTypeFilterMenu() {
@@ -1675,6 +1562,27 @@
                    return `<span class="${type.className}">${type.label}</span>`;
                })
                .join(' / ');
+       }
+
+       let primaryTypeById = {};
+
+       async function loadPrimaryTypeMap() {
+           try {
+               const res = await fetch('pokemon-primary-types.json');
+               if (res.ok) {
+                   const data = await res.json();
+                   primaryTypeById = data && typeof data === 'object' ? data : {};
+               }
+           } catch (e) {
+               primaryTypeById = {};
+           }
+       }
+
+       /** Bordure gauche tout de suite (fichier local + TYPE_CONFIG), sans attendre l’API. */
+       function applyImmediateCardBorder(section, id) {
+           const typeName = primaryTypeById[String(id)];
+           if (!typeName) return;
+           section.style.borderLeft = `4px solid ${getTypeConfig(typeName).color}`;
        }
 
        async function loadPokemonDetails(nameOrId) {
@@ -1847,13 +1755,8 @@
                if (typeContainer) {
                    typeContainer.innerHTML = `Type: ${renderTypeBadges(pokemon.types)}`;
                }
-               delete section.dataset.pendingFullTypes;
            } catch (error) {
-               const typeContainer = section.querySelector('.pokemon-type');
-               if (typeContainer && typeContainer.textContent.includes('Chargement')) {
-                   section.style.borderLeft = '4px solid #A8A878';
-                   typeContainer.innerHTML = 'Type: <span class="type-normal">?</span>';
-               }
+               section.style.borderLeft = '4px solid #A8A878';
            }
        }
 
@@ -1873,29 +1776,32 @@
 
            const button = section.querySelector('button');
            button.addEventListener('click', () => openEvolutionModal(id, displayName));
-           applyLocalPrimaryTypeToCard(section, id);
-           enqueueCardTypeStyle(section, id);
+           applyImmediateCardBorder(section, id);
+           applyCardTypeStyle(section, name);
            return section;
        }
 
-       function styleExistingCardsWithoutTypeBorder() {
+       async function styleExistingCardsWithoutTypeBorder() {
            const sections = Array.from(moncontainer.querySelectorAll('section'));
-           for (const section of sections) {
+           const tasks = sections.map(async section => {
                const numberEl = section.querySelector('.pokemon-number');
-               if (!numberEl) continue;
+               if (!numberEl) return;
 
                const id = Number(numberEl.textContent.replace('#', '').trim());
-               if (!Number.isFinite(id)) continue;
+               if (!Number.isFinite(id)) return;
+
+               applyImmediateCardBorder(section, id);
 
                const typeRow = section.querySelector('.pokemon-type');
-               applyLocalPrimaryTypeToCard(section, id);
-
+               const loadingTypes = typeRow && typeRow.textContent.includes('Chargement');
                const computed = window.getComputedStyle(section);
                const hasBorder = Number.parseFloat(computed.borderLeftWidth) > 0;
-               if (typeRowNeedsApiRefresh(section, typeRow) || !hasBorder) {
-                   enqueueCardTypeStyle(section, id);
-               }
-           }
+               if (hasBorder && !loadingTypes) return;
+
+               await applyCardTypeStyle(section, id);
+           });
+
+           await Promise.allSettled(tasks);
        }
 
        async function addAllMissingPokemon() {
@@ -1923,7 +1829,6 @@
            } finally {
                reorderSectionsBySort();
                updateGridView(false);
-               retryCardStylesStillLoading();
            }
        }
 
