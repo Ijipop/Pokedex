@@ -1,5 +1,5 @@
 /**
- * Génère pokemon-primary-types.json (id national → type principal anglais PokéAPI).
+ * Génère pokemon-primary-types.json et primary-types.js (window.PRIMARY_TYPES_BY_ID).
  * Usage : node scripts/generate-pokemon-primary-types.mjs
  */
 import fs from 'fs';
@@ -9,6 +9,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const outFile = path.join(root, 'pokemon-primary-types.json');
+const outJs = path.join(root, 'primary-types.js');
+
+function writePrimaryTypesJs(map) {
+    const body = `window.PRIMARY_TYPES_BY_ID = ${JSON.stringify(map)};\n`;
+    fs.writeFileSync(outJs, body);
+    console.log('Écrit', outJs);
+}
 
 async function fetchJson(url) {
     const res = await fetch(url, { headers: { 'User-Agent': 'PokedexCoursework/1.0' } });
@@ -55,6 +62,7 @@ async function main() {
 
     fs.writeFileSync(outFile, JSON.stringify(map));
     console.log('Écrit', Object.keys(map).length, 'entrées dans', outFile);
+    writePrimaryTypesJs(map);
 }
 
 main().catch(e => {

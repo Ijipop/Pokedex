@@ -1349,7 +1349,7 @@
     </div>
    
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+   <script src="primary-types.js"></script>
    <script>
        const searchBar = document.querySelector('.search-bar');
        const moncontainer = document.querySelector('.moncontainer');
@@ -1495,6 +1495,26 @@
            }
 
            syncPaginationUI(matchCount, totalPages);
+           flushPendingVisibleCardStyles();
+       }
+
+       /** Types via API seulement pour les cartes visibles (page + filtres). */
+       function flushPendingVisibleCardStyles() {
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           const searchTerm = normalizeText(searchBar.value.trim());
+           const matched = sections.filter(sectionMatchesSearchAndType);
+           const start = (currentPage - 1) * PAGE_SIZE;
+           const visibleSet = new Set(matched.slice(start, start + PAGE_SIZE));
+
+           for (const section of moncontainer.querySelectorAll('section[data-pending-type-api="1"]')) {
+               if (!visibleSet.has(section)) continue;
+               const numberEl = section.querySelector('.pokemon-number');
+               if (!numberEl) continue;
+               const id = Number(numberEl.textContent.replace('#', '').trim());
+               if (!Number.isFinite(id)) continue;
+               section.removeAttribute('data-pending-type-api');
+               applyCardTypeStyle(section, id);
+           }
        }
 
        function buildTypeFilterMenu() {
@@ -1564,21 +1584,12 @@
                .join(' / ');
        }
 
-       let primaryTypeById = {};
+       const primaryTypeById =
+           typeof window.PRIMARY_TYPES_BY_ID === 'object' && window.PRIMARY_TYPES_BY_ID !== null
+               ? window.PRIMARY_TYPES_BY_ID
+               : {};
 
-       async function loadPrimaryTypeMap() {
-           try {
-               const res = await fetch('pokemon-primary-types.json');
-               if (res.ok) {
-                   const data = await res.json();
-                   primaryTypeById = data && typeof data === 'object' ? data : {};
-               }
-           } catch (e) {
-               primaryTypeById = {};
-           }
-       }
-
-       /** Bordure gauche tout de suite (fichier local + TYPE_CONFIG), sans attendre l’API. */
+       /** Bordure gauche tout de suite (primary-types.js + TYPE_CONFIG), sans attendre l’API. */
        function applyImmediateCardBorder(section, id) {
            const typeName = primaryTypeById[String(id)];
            if (!typeName) return;
@@ -1777,18 +1788,18 @@
            const button = section.querySelector('button');
            button.addEventListener('click', () => openEvolutionModal(id, displayName));
            applyImmediateCardBorder(section, id);
-           applyCardTypeStyle(section, name);
+           section.setAttribute('data-pending-type-api', '1');
            return section;
        }
 
-       async function styleExistingCardsWithoutTypeBorder() {
+       function styleExistingCardsWithoutTypeBorder() {
            const sections = Array.from(moncontainer.querySelectorAll('section'));
-           const tasks = sections.map(async section => {
+           for (const section of sections) {
                const numberEl = section.querySelector('.pokemon-number');
-               if (!numberEl) return;
+               if (!numberEl) continue;
 
                const id = Number(numberEl.textContent.replace('#', '').trim());
-               if (!Number.isFinite(id)) return;
+               if (!Number.isFinite(id)) continue;
 
                applyImmediateCardBorder(section, id);
 
@@ -1796,22 +1807,21 @@
                const loadingTypes = typeRow && typeRow.textContent.includes('Chargement');
                const computed = window.getComputedStyle(section);
                const hasBorder = Number.parseFloat(computed.borderLeftWidth) > 0;
-               if (hasBorder && !loadingTypes) return;
+               if (hasBorder && !loadingTypes) continue;
 
-               await applyCardTypeStyle(section, id);
-           });
-
-           await Promise.allSettled(tasks);
+               section.setAttribute('data-pending-type-api', '1');
+           }
+           flushPendingVisibleCardStyles();
        }
 
-       async function addAllMissingPokemon() {
+       async function addAllMissingPokemon(listDataPromise) {
            const existingIds = new Set(
                Array.from(document.querySelectorAll('.moncontainer .pokemon-number'))
                    .map(el => Number(el.textContent.replace('#', '').trim()))
                    .filter(Number.isFinite)
            );
 
-           const listData = await fetchJsonWithRetry('https://pokeapi.co/api/v2/pokemon?limit=2000');
+           const listData = await (listDataPromise || fetchJsonWithRetry('https://pokeapi.co/api/v2/pokemon?limit=2000'));
            const missing = listData.results
                .map(p => ({ id: getPokemonIdFromUrl(p.url), name: p.name }))
                .filter(p => p.id && !existingIds.has(p.id));
@@ -1876,14 +1886,14 @@
        document.head.appendChild(style);
 
        (async function initPokedex() {
-           await loadPrimaryTypeMap();
+           const listDataPromise = fetchJsonWithRetry('https://pokeapi.co/api/v2/pokemon?limit=2000');
            buildTypeFilterMenu();
            setupEvolutionModalDismissOnOutsideClick();
            reorderSectionsBySort();
            updateGridView(false);
            styleExistingCardsWithoutTypeBorder();
 
-           addAllMissingPokemon().catch(() => {
+           addAllMissingPokemon(listDataPromise).catch(() => {
                const message = document.createElement('div');
                message.className = 'no-results-message';
                message.style.cssText = 'text-align: center; padding: 20px; color: #b00; grid-column: 1 / -1;';
