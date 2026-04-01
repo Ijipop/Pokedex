@@ -1580,6 +1580,22 @@
            return details;
        }
 
+       function setupEvolutionModalDismissOnOutsideClick() {
+           document.addEventListener('click', (e) => {
+               if (e.target.classList.contains('modal-backdrop')) {
+                   const modal = document.querySelector('.modal.show');
+                   if (modal) bootstrap.Modal.getInstance(modal)?.hide();
+                   return;
+               }
+               const modalEl = e.target.closest('.modal.show');
+               if (!modalEl) return;
+               const content = modalEl.querySelector('.modal-content');
+               if (content && !content.contains(e.target)) {
+                   bootstrap.Modal.getInstance(modalEl)?.hide();
+               }
+           });
+       }
+
        function ensureDynamicEvolutionModal() {
            let modal = document.getElementById('evolution-dynamic');
            if (modal) return modal;
@@ -1661,7 +1677,7 @@
            title.textContent = `Famille évolutive — ${displayName}`;
            body.innerHTML = '<p class="text-center m-0">Chargement...</p>';
 
-           const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+           const modal = bootstrap.Modal.getOrCreateInstance(modalEl, { backdrop: true, keyboard: true });
            modal.show();
 
            try {
@@ -1832,6 +1848,7 @@
        document.head.appendChild(style);
 
        buildTypeFilterMenu();
+       setupEvolutionModalDismissOnOutsideClick();
        reorderSectionsBySort();
        updateGridView(false);
        styleExistingCardsWithoutTypeBorder();
