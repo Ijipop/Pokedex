@@ -210,6 +210,8 @@ footer.contact a:hover {
 
 /* Cartes Pokémon — grille (effet « premium ») */
 .moncontainer > section {
+    --type-accent: #e8b020;
+    --type-accent-rgb: 232, 176, 32;
     background: linear-gradient(165deg, #fffef9 0%, #ffffff 42%, #faf6f0 100%);
     border-radius: 22px;
     padding: 1.65rem 1.35rem 1.75rem;
@@ -241,12 +243,13 @@ footer.contact a:hover {
     height: 4px;
     background: linear-gradient(
         90deg,
-        #e8b020,
-        #ffe566,
-        #fff8c8,
-        #ffd700,
-        #f4a020,
-        #ffe566
+        rgba(var(--type-accent-rgb), 0.75),
+        rgba(var(--type-accent-rgb), 1),
+        rgba(255, 255, 255, 0.92),
+        rgba(var(--type-accent-rgb), 1),
+        rgba(var(--type-accent-rgb), 0.55),
+        rgba(255, 255, 255, 0.75),
+        rgba(var(--type-accent-rgb), 0.95)
     );
     background-size: 300% 100%;
     animation: pokedexCardShine 5s linear infinite;
@@ -267,7 +270,12 @@ footer.contact a:hover {
     position: absolute;
     inset: -40% -30% auto;
     height: 70%;
-    background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.14) 0%, transparent 62%);
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(var(--type-accent-rgb), 0.2) 0%,
+        rgba(var(--type-accent-rgb), 0.06) 42%,
+        transparent 62%
+    );
     pointer-events: none;
     z-index: 0;
 }
@@ -288,8 +296,8 @@ section.contact {
     box-shadow:
         0 8px 16px rgba(40, 30, 15, 0.08),
         0 22px 44px rgba(40, 30, 15, 0.14),
-        0 0 0 2px rgba(255, 215, 0, 0.35),
-        0 0 28px rgba(255, 215, 0, 0.2),
+        0 0 0 2px rgba(var(--type-accent-rgb), 0.5),
+        0 0 32px rgba(var(--type-accent-rgb), 0.28),
         inset 0 1px 0 rgba(255, 255, 255, 1);
     z-index: 2;
 }
@@ -461,21 +469,12 @@ img {
     font-weight: 800;
     margin: 0.15rem 0 0.2rem;
     letter-spacing: -0.02em;
-    color: #1e1a2e;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-    background: linear-gradient(120deg, #2d2640 0%, #1a1528 50%, #3d3555 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 3px rgba(255, 215, 0, 0.15));
-}
-
-@supports not (background-clip: text) {
-    .moncontainer .pokemon-name {
-        color: #1e1a2e;
-        -webkit-text-fill-color: unset;
-        background: none;
-    }
+    color: #120d1a;
+    -webkit-text-fill-color: #120d1a;
+    background: none;
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 1),
+        0 2px 6px rgba(0, 0, 0, 0.14);
 }
 
 .pokemon-type {
