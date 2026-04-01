@@ -537,11 +537,53 @@ img {
 
 /* Style pour la modal (carte de l'évolution) */
 
-
+/* Conteneur externe (structure HTML historique) : ne plus brider la largeur */
 .modal-custom-width {
-    max-width: 200px; 
+    max-width: 100%;
+    width: 100%;
 }
 
+/* Modales d'évolution : boîte de dialogue plus large */
+.modal.fade .modal-dialog {
+    max-width: min(560px, 94vw);
+}
+
+.modal .modal-content {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(255, 215, 0, 0.35);
+}
+
+.modal .modal-header {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #2d2d2d 0%, #252525 100%);
+    color: #ffd700;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.28);
+    padding: 1rem 1.25rem;
+}
+
+.modal .modal-title {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.modal .modal-header .btn-close {
+    filter: invert(1);
+    opacity: 0.82;
+}
+
+.modal .modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+.modal .modal-body {
+    background: linear-gradient(180deg, #ffffff 0%, #fffef6 100%);
+    padding: 1.5rem 1.25rem 1.75rem;
+}
 
 .pokemon-card {
     background-color: rgb(255, 255, 255);
@@ -557,6 +599,16 @@ img {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.modal .pokemon-card {
+    max-width: 420px;
+    width: 100%;
+    padding: 1.5rem 1.75rem;
+    border-radius: 16px;
+    background: linear-gradient(165deg, #ffffff 0%, #fffbf0 100%);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 .pokemon-card img {
     width: 100%;
     max-width: 250px;
@@ -566,39 +618,96 @@ img {
     padding: 10px;
 }
 
+.modal .pokemon-card img {
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+}
+
 .pokemon-type {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px; 
+    gap: 5px;
     flex-wrap: nowrap;
 }
 
-    .shiny-glow {
-        animation: shinyGlow 2s infinite alternate;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.3);
-    }
-    
-    @keyframes shinyGlow {
-        from {
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-            transform: scale(1);
-        }
-        to {
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
-            transform: scale(1.03);
-        }
-    }
+.shiny-glow {
+    animation: shinyGlow 2s infinite alternate;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.3);
+}
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: red; 
-      border-radius: 70%;
-      width: 20px;
-      height: 20px;
-      opacity: 1; 
+@keyframes shinyGlow {
+    from {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        transform: scale(1);
     }
-    .carousel-inner img {
+    to {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+        transform: scale(1.03);
+    }
+}
+
+.modal .shiny-glow {
+    animation: shinyGlowModal 2.5s ease-in-out infinite alternate;
+    box-shadow:
+        0 0 14px rgba(255, 215, 0, 0.4),
+        0 0 32px rgba(255, 230, 160, 0.25),
+        inset 0 0 0 1px rgba(255, 215, 0, 0.18);
+}
+
+@keyframes shinyGlowModal {
+    from {
+        box-shadow:
+            0 0 12px rgba(255, 215, 0, 0.35),
+            0 0 28px rgba(255, 240, 180, 0.2),
+            inset 0 0 0 1px rgba(255, 215, 0, 0.15);
+        transform: scale(1);
+    }
+    to {
+        box-shadow:
+            0 0 24px rgba(255, 215, 0, 0.55),
+            0 0 44px rgba(255, 220, 120, 0.32),
+            inset 0 0 0 1px rgba(255, 215, 0, 0.28);
+        transform: scale(1.015);
+    }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    border-radius: 70%;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+}
+
+.modal .carousel-control-prev,
+.modal .carousel-control-next {
+    width: 3rem;
+    height: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+.modal .carousel-control-prev-icon,
+.modal .carousel-control-next-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: rgba(35, 35, 35, 0.88);
+    background-size: 55% 55%;
+    background-position: center;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal .carousel-control-prev:hover .carousel-control-prev-icon,
+.modal .carousel-control-next:hover .carousel-control-next-icon {
+    background-color: rgba(50, 50, 50, 0.95);
+    box-shadow: 0 0 0 2px rgba(255, 223, 80, 0.85), 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.carousel-inner img {
     padding: 0 30px;
     height: 200px;
     width: 200px;
@@ -606,9 +715,70 @@ img {
     margin: 0 auto;
 }
 
+.modal .carousel-inner img {
+    width: 100%;
+    max-width: 360px;
+    min-height: 280px;
+    height: auto;
+    max-height: 380px;
+    padding: 0.5rem 2.5rem;
+    object-fit: contain;
+    margin: 0 auto;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+}
+
 .carousel-item {
     text-align: center;
     min-height: 350px;
+}
+
+.modal .carousel-item {
+    min-height: 430px;
+}
+
+.modal .carousel-item .pokemon-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-top: 0.35rem;
+}
+
+@media screen and (max-width: 576px) {
+    .modal.fade .modal-dialog {
+        max-width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+    }
+
+    .modal .modal-body {
+        padding: 1rem 0.75rem 1.25rem;
+    }
+
+    .modal .pokemon-card {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .modal .carousel-inner img {
+        max-width: 100%;
+        min-height: 200px;
+        max-height: 52vh;
+        padding: 0.25rem 2rem;
+    }
+
+    .modal .carousel-item {
+        min-height: 360px;
+    }
+
+    .modal .carousel-control-prev,
+    .modal .carousel-control-next {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .modal .carousel-control-prev-icon,
+    .modal .carousel-control-next-icon {
+        width: 2rem;
+        height: 2rem;
+    }
 }
 
 /* Barre tri + pagination */
