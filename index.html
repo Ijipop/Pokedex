@@ -1495,6 +1495,84 @@
            }
 
            syncPaginationUI(matchCount, totalPages);
+           prioritizeVisibleCardStyles();
+       }
+
+       function getVisiblePokemonSections() {
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           const matched = sections.filter(sectionMatchesSearchAndType);
+           const start = (currentPage - 1) * PAGE_SIZE;
+           return new Set(matched.slice(start, start + PAGE_SIZE));
+       }
+
+       function isSectionStyleVisible(section) {
+           return getVisiblePokemonSections().has(section);
+       }
+
+       const CARD_STYLE_CONCURRENCY = 5;
+       let cardStyleActive = 0;
+       const cardStyleWaitQueue = [];
+       let cardStyleJobSeq = 0;
+
+       function removeCardStyleJobsForSection(section) {
+           for (let i = cardStyleWaitQueue.length - 1; i >= 0; i--) {
+               if (cardStyleWaitQueue[i].section === section) {
+                   cardStyleWaitQueue.splice(i, 1);
+               }
+           }
+       }
+
+       function enqueueCardTypeStyle(section, pokemonNameOrId, priorityOverride) {
+           removeCardStyleJobsForSection(section);
+           const priority =
+               priorityOverride !== undefined
+                   ? priorityOverride
+                   : isSectionStyleVisible(section)
+                     ? 0
+                     : 1;
+           cardStyleWaitQueue.push({
+               section,
+               pokemonNameOrId,
+               priority,
+               seq: cardStyleJobSeq++
+           });
+           cardStyleWaitQueue.sort((a, b) => a.priority - b.priority || a.seq - b.seq);
+           pumpCardStyleQueue();
+       }
+
+       function pumpCardStyleQueue() {
+           while (cardStyleActive < CARD_STYLE_CONCURRENCY && cardStyleWaitQueue.length > 0) {
+               const job = cardStyleWaitQueue.shift();
+               cardStyleActive++;
+               applyCardTypeStyle(job.section, job.pokemonNameOrId).finally(() => {
+                   cardStyleActive--;
+                   pumpCardStyleQueue();
+               });
+           }
+       }
+
+       function prioritizeVisibleCardStyles() {
+           for (const section of getVisiblePokemonSections()) {
+               const typeRow = section.querySelector('.pokemon-type');
+               if (!typeRow || !typeRow.textContent.includes('Chargement')) continue;
+               const numEl = section.querySelector('.pokemon-number');
+               if (!numEl) continue;
+               const id = Number(numEl.textContent.replace('#', '').trim());
+               if (!Number.isFinite(id)) continue;
+               enqueueCardTypeStyle(section, id, 0);
+           }
+       }
+
+       function retryCardStylesStillLoading() {
+           moncontainer.querySelectorAll('section').forEach(section => {
+               const typeRow = section.querySelector('.pokemon-type');
+               if (!typeRow || !typeRow.textContent.includes('Chargement')) return;
+               const numEl = section.querySelector('.pokemon-number');
+               if (!numEl) return;
+               const id = Number(numEl.textContent.replace('#', '').trim());
+               if (!Number.isFinite(id)) return;
+               enqueueCardTypeStyle(section, id, isSectionStyleVisible(section) ? 0 : 1);
+           });
        }
 
        function buildTypeFilterMenu() {
@@ -1725,15 +1803,21 @@
            }
        }
 
-       async function applyCardTypeStyle(section, pokemonName) {
+       async function applyCardTypeStyle(section, pokemonNameOrId) {
            try {
-               const pokemon = await loadPokemonDetails(pokemonName);
+               const pokemon = await loadPokemonDetails(pokemonNameOrId);
                const primaryType = getTypeConfig(pokemon.types[0]);
                section.style.borderLeft = `4px solid ${primaryType.color}`;
                const typeContainer = section.querySelector('.pokemon-type');
-               typeContainer.innerHTML = `Type: ${renderTypeBadges(pokemon.types)}`;
+               if (typeContainer) {
+                   typeContainer.innerHTML = `Type: ${renderTypeBadges(pokemon.types)}`;
+               }
            } catch (error) {
                section.style.borderLeft = '4px solid #A8A878';
+               const typeContainer = section.querySelector('.pokemon-type');
+               if (typeContainer && typeContainer.textContent.includes('Chargement')) {
+                   typeContainer.innerHTML = 'Type: <span class="type-normal">?</span>';
+               }
            }
        }
 
@@ -1753,27 +1837,25 @@
 
            const button = section.querySelector('button');
            button.addEventListener('click', () => openEvolutionModal(id, displayName));
-           applyCardTypeStyle(section, name);
+           enqueueCardTypeStyle(section, name);
            return section;
        }
 
-       async function styleExistingCardsWithoutTypeBorder() {
+       function styleExistingCardsWithoutTypeBorder() {
            const sections = Array.from(moncontainer.querySelectorAll('section'));
-           const tasks = sections.map(async section => {
+           for (const section of sections) {
                const numberEl = section.querySelector('.pokemon-number');
-               if (!numberEl) return;
+               if (!numberEl) continue;
 
                const id = Number(numberEl.textContent.replace('#', '').trim());
-               if (!Number.isFinite(id)) return;
+               if (!Number.isFinite(id)) continue;
 
                const computed = window.getComputedStyle(section);
                const hasBorder = Number.parseFloat(computed.borderLeftWidth) > 0;
-               if (hasBorder) return;
+               if (hasBorder) continue;
 
-               await applyCardTypeStyle(section, id);
-           });
-
-           await Promise.allSettled(tasks);
+               enqueueCardTypeStyle(section, id);
+           }
        }
 
        async function addAllMissingPokemon() {
@@ -1801,6 +1883,7 @@
            } finally {
                reorderSectionsBySort();
                updateGridView(false);
+               retryCardStylesStillLoading();
            }
        }
 
