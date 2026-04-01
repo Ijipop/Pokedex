@@ -1,12 +1,13 @@
 /* Import des polices Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Nunito:wght@600;700&family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap');
 @import url('https://fonts.cdnfonts.com/css/pokemon-solid');
 
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e9e2e2;
+    background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 220, 140, 0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #ebe4dc 0%, #e5ddd4 50%, #e0d8cf 100%);
 }
 
 header {
@@ -118,8 +119,8 @@ footer.contact a:hover {
 
 .moncontainer {
     display: grid;
-    gap: 16px;
-    padding: 16px;
+    gap: 20px;
+    padding: 20px 18px 28px;
 }
 
 /* 1 colonne < 768px */
@@ -141,19 +142,19 @@ footer.contact a:hover {
     }
 }
 
-/* Ajustements pour les cartes */
+/* Ajustements pour les cartes (grille Pokédex) */
 @media screen and (max-width: 768px) {
-    section {
+    .moncontainer > section {
         margin: 5px;
-        padding: 15px;
+        padding: 1.15rem 1rem 1.25rem;
     }
-    
-    .pokemon-name {
+
+    .moncontainer .pokemon-name {
         font-size: 1.2em;
     }
-    
-    .pokemon-number {
-        font-size: 1em;
+
+    .moncontainer .pokemon-number {
+        font-size: 0.95em;
     }
 }
 
@@ -207,19 +208,72 @@ footer.contact a:hover {
     }
 }
 
-/* Style pour les cartes Pokémon */
-section {
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* Cartes Pokémon — grille (effet « premium ») */
+.moncontainer > section {
+    background: linear-gradient(165deg, #fffef9 0%, #ffffff 42%, #faf6f0 100%);
+    border-radius: 22px;
+    padding: 1.65rem 1.35rem 1.75rem;
+    box-shadow:
+        0 2px 4px rgba(40, 30, 15, 0.04),
+        0 14px 32px rgba(40, 30, 15, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     cursor: pointer;
     margin: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: scale(1) translateY(0);  
-    transition: all 0.3s ease-in-out;
+    transform: scale(1) translateY(0);
+    transition:
+        transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
+        box-shadow 0.35s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.moncontainer > section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        #e8b020,
+        #ffe566,
+        #fff8c8,
+        #ffd700,
+        #f4a020,
+        #ffe566
+    );
+    background-size: 300% 100%;
+    animation: pokedexCardShine 5s linear infinite;
+    z-index: 2;
+}
+
+@keyframes pokedexCardShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+.moncontainer > section::after {
+    content: '';
+    position: absolute;
+    inset: -40% -30% auto;
+    height: 70%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.14) 0%, transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.moncontainer > section .pokemon-info,
+.moncontainer > section > img {
     position: relative;
     z-index: 1;
 }
@@ -229,10 +283,14 @@ section.contact {
     display: none;
 }
 
-/* Effet */   
-section:hover {
-    transform: scale(1.03) translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+.moncontainer > section:hover {
+    transform: scale(1.035) translateY(-12px);
+    box-shadow:
+        0 8px 16px rgba(40, 30, 15, 0.08),
+        0 22px 44px rgba(40, 30, 15, 0.14),
+        0 0 0 2px rgba(255, 215, 0, 0.35),
+        0 0 28px rgba(255, 215, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
     z-index: 2;
 }
 
@@ -243,6 +301,42 @@ img {
     border-radius: 8px;
     display: block;
     margin: 0 auto;
+}
+
+.moncontainer > section > img {
+    max-width: 220px;
+    border-radius: 16px;
+    padding: 0.35rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(250, 245, 235, 0.9));
+    box-shadow:
+        0 6px 20px rgba(30, 22, 10, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.08));
+    transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.moncontainer > section:hover > img {
+    transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .moncontainer > section::before {
+        animation: none;
+    }
+
+    .moncontainer > section,
+    .moncontainer > section > img,
+    .moncontainer .btn-success {
+        transition: none;
+    }
+
+    .moncontainer > section:hover {
+        transform: none;
+    }
+
+    .moncontainer > section:hover > img {
+        transform: none;
+    }
 }
 
 /* Style pour les cartes Pokémon */
@@ -304,12 +398,25 @@ img {
 .pokemon12 {
     border-left: 4px solid #ff4444; 
     
-}   
+}
+
+.moncontainer > section[class*="pokemon"] {
+    border-left-width: 6px;
+}
 
 .pokemon-info {
     text-align: center;
     color: rgb(0, 0, 0);
     margin-bottom: 15px;
+}
+
+.moncontainer .pokemon-info {
+    width: 100%;
+    margin-bottom: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
 }
 
 .pokemon-number {
@@ -322,6 +429,23 @@ img {
     letter-spacing: 0.5px;
 }
 
+.moncontainer .pokemon-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #5c4a12;
+    background: linear-gradient(180deg, #fff8dc 0%, #ffeaa0 45%, #f0c040 100%);
+    border: 1px solid rgba(200, 160, 40, 0.45);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 0.25rem;
+    box-shadow:
+        0 2px 0 rgba(180, 140, 50, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    display: inline-block;
+}
+
 .pokemon-name {
     font-size: 1.35em;
     margin: 5px 0;
@@ -331,12 +455,83 @@ img {
     letter-spacing: -0.3px;
 }
 
+.moncontainer .pokemon-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    margin: 0.15rem 0 0.2rem;
+    letter-spacing: -0.02em;
+    color: #1e1a2e;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    background: linear-gradient(120deg, #2d2640 0%, #1a1528 50%, #3d3555 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 3px rgba(255, 215, 0, 0.15));
+}
+
+@supports not (background-clip: text) {
+    .moncontainer .pokemon-name {
+        color: #1e1a2e;
+        -webkit-text-fill-color: unset;
+        background: none;
+    }
+}
+
 .pokemon-type {
     font-size: 1em;
     font-weight: 500;
     display: block;
     margin-top: 5px;
     font-family: 'Inter', sans-serif;
+}
+
+.moncontainer .pokemon-type {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-top: 0.35rem;
+    color: #4a4035;
+    letter-spacing: 0.02em;
+}
+
+.moncontainer .btn-success {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.35rem;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(180deg, #fff1a0 0%, #f8d030 40%, #e0a810 100%);
+    color: #2a1f08;
+    box-shadow:
+        0 3px 0 #b8860b,
+        0 8px 20px rgba(200, 150, 20, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+    margin-top: 0.35rem !important;
+}
+
+.moncontainer .btn-success:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow:
+        0 4px 0 #a0780a,
+        0 12px 26px rgba(200, 150, 20, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    color: #1a1406;
+}
+
+.moncontainer .btn-success:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 1px 0 #b8860b,
+        0 4px 12px rgba(200, 150, 20, 0.3);
 }
 
 /* Styles de base pour tous les badges  */
