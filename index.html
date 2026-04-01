@@ -1362,6 +1362,41 @@
        const pageInfo = document.getElementById('pageInfo');
        const evolutionCache = new Map();
        const pokemonDetailsCache = new Map();
+       /** id (string) → type principal PokéAPI (ex. "grass"), depuis pokemon-primary-types.json */
+       let primaryTypeById = {};
+
+       async function loadPrimaryTypeMap() {
+           try {
+               const res = await fetch('pokemon-primary-types.json');
+               if (res.ok) {
+                   const data = await res.json();
+                   primaryTypeById = data && typeof data === 'object' ? data : {};
+               }
+           } catch (e) {
+               primaryTypeById = {};
+           }
+       }
+
+       function typeRowNeedsApiRefresh(section, typeRow) {
+           if (!typeRow) return false;
+           return (
+               typeRow.textContent.includes('Chargement') ||
+               section.dataset.pendingFullTypes === '1'
+           );
+       }
+
+       /** Style synchrone depuis la carte locale ; l’API complétera ensuite (2e type, etc.). */
+       function applyLocalPrimaryTypeToCard(section, id) {
+           if (!primaryTypeById || typeof primaryTypeById !== 'object') return;
+           const typeName = primaryTypeById[String(id)];
+           if (!typeName) return;
+           const typeContainer = section.querySelector('.pokemon-type');
+           if (!typeContainer || !typeContainer.textContent.includes('Chargement')) return;
+           const primaryType = getTypeConfig(typeName);
+           section.style.borderLeft = `4px solid ${primaryType.color}`;
+           typeContainer.innerHTML = `Type: ${renderTypeBadges([typeName])}`;
+           section.dataset.pendingFullTypes = '1';
+       }
        let activeTypeClass = 'all';
        const PAGE_SIZE = 100;
        let currentPage = 1;
@@ -1554,7 +1589,7 @@
        function prioritizeVisibleCardStyles() {
            for (const section of getVisiblePokemonSections()) {
                const typeRow = section.querySelector('.pokemon-type');
-               if (!typeRow || !typeRow.textContent.includes('Chargement')) continue;
+               if (!typeRow || !typeRowNeedsApiRefresh(section, typeRow)) continue;
                const numEl = section.querySelector('.pokemon-number');
                if (!numEl) continue;
                const id = Number(numEl.textContent.replace('#', '').trim());
@@ -1566,7 +1601,7 @@
        function retryCardStylesStillLoading() {
            moncontainer.querySelectorAll('section').forEach(section => {
                const typeRow = section.querySelector('.pokemon-type');
-               if (!typeRow || !typeRow.textContent.includes('Chargement')) return;
+               if (!typeRow || !typeRowNeedsApiRefresh(section, typeRow)) return;
                const numEl = section.querySelector('.pokemon-number');
                if (!numEl) return;
                const id = Number(numEl.textContent.replace('#', '').trim());
@@ -1812,10 +1847,11 @@
                if (typeContainer) {
                    typeContainer.innerHTML = `Type: ${renderTypeBadges(pokemon.types)}`;
                }
+               delete section.dataset.pendingFullTypes;
            } catch (error) {
-               section.style.borderLeft = '4px solid #A8A878';
                const typeContainer = section.querySelector('.pokemon-type');
                if (typeContainer && typeContainer.textContent.includes('Chargement')) {
+                   section.style.borderLeft = '4px solid #A8A878';
                    typeContainer.innerHTML = 'Type: <span class="type-normal">?</span>';
                }
            }
@@ -1837,7 +1873,8 @@
 
            const button = section.querySelector('button');
            button.addEventListener('click', () => openEvolutionModal(id, displayName));
-           enqueueCardTypeStyle(section, name);
+           applyLocalPrimaryTypeToCard(section, id);
+           enqueueCardTypeStyle(section, id);
            return section;
        }
 
@@ -1850,11 +1887,14 @@
                const id = Number(numberEl.textContent.replace('#', '').trim());
                if (!Number.isFinite(id)) continue;
 
+               const typeRow = section.querySelector('.pokemon-type');
+               applyLocalPrimaryTypeToCard(section, id);
+
                const computed = window.getComputedStyle(section);
                const hasBorder = Number.parseFloat(computed.borderLeftWidth) > 0;
-               if (hasBorder) continue;
-
-               enqueueCardTypeStyle(section, id);
+               if (typeRowNeedsApiRefresh(section, typeRow) || !hasBorder) {
+                   enqueueCardTypeStyle(section, id);
+               }
            }
        }
 
@@ -1930,19 +1970,22 @@
        `;
        document.head.appendChild(style);
 
-       buildTypeFilterMenu();
-       setupEvolutionModalDismissOnOutsideClick();
-       reorderSectionsBySort();
-       updateGridView(false);
-       styleExistingCardsWithoutTypeBorder();
+       (async function initPokedex() {
+           await loadPrimaryTypeMap();
+           buildTypeFilterMenu();
+           setupEvolutionModalDismissOnOutsideClick();
+           reorderSectionsBySort();
+           updateGridView(false);
+           styleExistingCardsWithoutTypeBorder();
 
-       addAllMissingPokemon().catch(() => {
-           const message = document.createElement('div');
-           message.className = 'no-results-message';
-           message.style.cssText = 'text-align: center; padding: 20px; color: #b00; grid-column: 1 / -1;';
-           message.textContent = 'Le Pokédex prend un peu plus de temps à se charger. Réessaie dans un instant.';
-           moncontainer.appendChild(message);
-       });
+           addAllMissingPokemon().catch(() => {
+               const message = document.createElement('div');
+               message.className = 'no-results-message';
+               message.style.cssText = 'text-align: center; padding: 20px; color: #b00; grid-column: 1 / -1;';
+               message.textContent = 'Le Pokédex prend un peu plus de temps à se charger. Réessaie dans un instant.';
+               moncontainer.appendChild(message);
+           });
+       })();
    </script>
 </body>
 </html>
