@@ -31,6 +31,25 @@
         </div>
     </header>
 
+    <div class="pokedex-toolbar" id="pokedexToolbar">
+        <div class="pokedex-toolbar-group">
+            <label class="pokedex-toolbar-label" for="sortSelect">Trier par</label>
+            <select id="sortSelect" class="form-select form-select-sm pokedex-sort-select" aria-label="Trier la liste">
+                <option value="number-asc"># croissant</option>
+                <option value="number-desc"># décroissant</option>
+                <option value="name-asc">Nom A → Z</option>
+                <option value="name-desc">Nom Z → A</option>
+            </select>
+        </div>
+        <div class="pokedex-toolbar-group pokedex-pagination" id="pokedexPagination">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="pagePrev" aria-label="Page précédente">Précédent</button>
+            <label class="visually-hidden" for="pageSelect">Choisir la page</label>
+            <select id="pageSelect" class="form-select form-select-sm pokedex-page-select" aria-label="Numéro de page"></select>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="pageNext" aria-label="Page suivante">Suivant</button>
+            <span class="pokedex-page-info" id="pageInfo" aria-live="polite"></span>
+        </div>
+    </div>
+
     <div class="moncontainer">
         <section class="pokemon1">
             <div class="pokemon-info">
@@ -1336,9 +1355,17 @@
        const moncontainer = document.querySelector('.moncontainer');
        const typeFilterButton = document.querySelector('.type-filter-button');
        const typeFilterMenu = document.querySelector('#typeFilterMenu');
+       const sortSelect = document.getElementById('sortSelect');
+       const pagePrev = document.getElementById('pagePrev');
+       const pageNext = document.getElementById('pageNext');
+       const pageSelect = document.getElementById('pageSelect');
+       const pageInfo = document.getElementById('pageInfo');
        const evolutionCache = new Map();
        const pokemonDetailsCache = new Map();
        let activeTypeClass = 'all';
+       const PAGE_SIZE = 100;
+       let currentPage = 1;
+       let sortMode = 'number-asc';
        const TYPE_CONFIG = {
            grass: { label: 'Plante', className: 'type-plante', color: '#3CAF50' },
            poison: { label: 'Poison', className: 'type-poison', color: '#A040A0' },
@@ -1369,34 +1396,94 @@
            return Boolean(section.querySelector(`.pokemon-type .${activeTypeClass}`));
        }
 
-       function searchPokemon() {
+       function getSectionDexNumber(section) {
+           const el = section.querySelector('.pokemon-number');
+           if (!el) return Number.POSITIVE_INFINITY;
+           const n = Number(el.textContent.replace('#', '').trim());
+           return Number.isFinite(n) ? n : Number.POSITIVE_INFINITY;
+       }
+
+       function getSectionDisplayName(section) {
+           const el = section.querySelector('.pokemon-name');
+           return el ? el.textContent.trim() : '';
+       }
+
+       function sectionMatchesSearchAndType(section) {
            const searchTerm = normalizeText(searchBar.value.trim());
-           const pokemonSections = document.querySelectorAll('.moncontainer section');
+           const pokemonName = section.querySelector('.pokemon-name');
+           const pokemonNumber = section.querySelector('.pokemon-number');
+           if (!pokemonName || !pokemonNumber) return false;
+           const name = normalizeText(pokemonName.textContent);
+           const number = pokemonNumber.textContent.trim();
+           const textMatch = searchTerm === '' || name.includes(searchTerm) || number.includes(searchTerm);
+           return textMatch && cardMatchesType(section);
+       }
 
-           pokemonSections.forEach(section => {
-               const pokemonName = section.querySelector('.pokemon-name');
-               const pokemonNumber = section.querySelector('.pokemon-number');
+       function reorderSectionsBySort() {
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           sections.sort((a, b) => {
+               const idA = getSectionDexNumber(a);
+               const idB = getSectionDexNumber(b);
+               const nameA = getSectionDisplayName(a);
+               const nameB = getSectionDisplayName(b);
+               switch (sortMode) {
+                   case 'number-desc':
+                       return idB - idA;
+                   case 'name-asc':
+                       return nameA.localeCompare(nameB, 'fr', { sensitivity: 'base' });
+                   case 'name-desc':
+                       return nameB.localeCompare(nameA, 'fr', { sensitivity: 'base' });
+                   case 'number-asc':
+                   default:
+                       return idA - idB;
+               }
+           });
+           sections.forEach(s => moncontainer.appendChild(s));
+       }
 
-               if (pokemonName && pokemonNumber) {
-                   const name = normalizeText(pokemonName.textContent);
-                   const number = pokemonNumber.textContent.trim();
+       function syncPaginationUI(matchCount, totalPages) {
+           pageSelect.innerHTML = '';
+           for (let p = 1; p <= totalPages; p++) {
+               const opt = document.createElement('option');
+               opt.value = String(p);
+               opt.textContent = `Page ${p}`;
+               pageSelect.appendChild(opt);
+           }
+           pageSelect.value = String(currentPage);
+           pagePrev.disabled = currentPage <= 1 || matchCount === 0;
+           pageNext.disabled = currentPage >= totalPages || matchCount === 0;
+           pageSelect.disabled = matchCount === 0;
+           pageInfo.textContent = `Page ${currentPage} / ${totalPages} · ${matchCount} Pokémon`;
+       }
 
-                   const textMatch = searchTerm === '' || name.includes(searchTerm) || number.includes(searchTerm);
-                   const typeMatch = cardMatchesType(section);
-                   if (textMatch && typeMatch) {
-                       section.style.display = 'flex';
-                       section.style.animation = 'fadeIn 0.3s ease-in';
-                   } else {
-                       section.style.display = 'none';
-                   }
+       function updateGridView(resetToFirstPage = false) {
+           if (resetToFirstPage) currentPage = 1;
+
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           const searchTerm = normalizeText(searchBar.value.trim());
+           const matched = sections.filter(sectionMatchesSearchAndType);
+           const matchCount = matched.length;
+           const totalPages = Math.max(1, Math.ceil(matchCount / PAGE_SIZE));
+
+           if (currentPage > totalPages) currentPage = totalPages;
+           if (currentPage < 1) currentPage = 1;
+
+           const start = (currentPage - 1) * PAGE_SIZE;
+           const visibleSet = new Set(matched.slice(start, start + PAGE_SIZE));
+
+           sections.forEach(section => {
+               if (visibleSet.has(section)) {
+                   section.style.display = 'flex';
+                   section.style.animation = 'fadeIn 0.3s ease-in';
+               } else {
+                   section.style.display = 'none';
                }
            });
 
-           const visiblePokemons = Array.from(pokemonSections).filter(section => section.style.display !== 'none');
            const oldMessage = document.querySelector('.no-results-message');
            if (oldMessage) oldMessage.remove();
 
-           if (visiblePokemons.length === 0 && (searchTerm !== '' || activeTypeClass !== 'all')) {
+           if (matchCount === 0 && (searchTerm !== '' || activeTypeClass !== 'all')) {
                const message = document.createElement('div');
                message.className = 'no-results-message';
                message.style.cssText = 'text-align: center; padding: 40px; font-size: 1.2em; color: #666; grid-column: 1 / -1;';
@@ -1406,6 +1493,8 @@
                `;
                moncontainer.appendChild(message);
            }
+
+           syncPaginationUI(matchCount, totalPages);
        }
 
        function buildTypeFilterMenu() {
@@ -1427,7 +1516,7 @@
                    typeFilterMenu.querySelectorAll('.type-filter-item').forEach(btn => btn.classList.remove('active'));
                    item.classList.add('active');
                    typeFilterButton.textContent = activeTypeClass === 'all' ? 'Type: Tous' : `Type: ${item.textContent.trim()}`;
-                   searchPokemon();
+                   updateGridView(true);
                });
            });
        }
@@ -1642,19 +1731,53 @@
                .filter(p => p.id && !existingIds.has(p.id));
 
            const chunkSize = 60;
-           for (let i = 0; i < missing.length; i += chunkSize) {
-               const chunk = missing.slice(i, i + chunkSize);
-               const fragment = document.createDocumentFragment();
-               chunk.forEach(p => fragment.appendChild(createDynamicCard(p.id, p.name)));
-               moncontainer.appendChild(fragment);
-               searchPokemon();
-               await new Promise(resolve => requestAnimationFrame(resolve));
+           try {
+               for (let i = 0; i < missing.length; i += chunkSize) {
+                   const chunk = missing.slice(i, i + chunkSize);
+                   const fragment = document.createDocumentFragment();
+                   chunk.forEach(p => fragment.appendChild(createDynamicCard(p.id, p.name)));
+                   moncontainer.appendChild(fragment);
+                   updateGridView(false);
+                   await new Promise(resolve => requestAnimationFrame(resolve));
+               }
+           } finally {
+               reorderSectionsBySort();
+               updateGridView(false);
            }
        }
 
-       searchBar.addEventListener('input', searchPokemon);
+       searchBar.addEventListener('input', () => updateGridView(true));
        searchBar.addEventListener('keypress', function(e) {
-           if (e.key === 'Enter') searchPokemon();
+           if (e.key === 'Enter') updateGridView(true);
+       });
+
+       sortSelect.addEventListener('change', () => {
+           sortMode = sortSelect.value;
+           currentPage = 1;
+           reorderSectionsBySort();
+           updateGridView(false);
+       });
+
+       pagePrev.addEventListener('click', () => {
+           if (currentPage > 1) {
+               currentPage--;
+               updateGridView(false);
+           }
+       });
+
+       pageNext.addEventListener('click', () => {
+           const sections = Array.from(moncontainer.querySelectorAll('section'));
+           const matchCount = sections.filter(sectionMatchesSearchAndType).length;
+           const totalPages = Math.max(1, Math.ceil(matchCount / PAGE_SIZE));
+           if (currentPage < totalPages) {
+               currentPage++;
+               updateGridView(false);
+           }
+       });
+
+       pageSelect.addEventListener('change', () => {
+           currentPage = Number(pageSelect.value) || 1;
+           updateGridView(false);
        });
 
        const style = document.createElement('style');
@@ -1667,6 +1790,8 @@
        document.head.appendChild(style);
 
        buildTypeFilterMenu();
+       reorderSectionsBySort();
+       updateGridView(false);
        styleExistingCardsWithoutTypeBorder();
 
        addAllMissingPokemon().catch(() => {
