@@ -1613,31 +1613,69 @@
            return output;
        }
 
-       async function loadEvolutionData(pokemonName) {
-           if (evolutionCache.has(pokemonName)) return evolutionCache.get(pokemonName);
+       /** Suffixe de variété PokeAPI (ex. alola, galar, mega-x) : même forme pour toute la chaîne quand c'est possible. */
+       function deriveFormSuffix(pokemonSlug, speciesSlug) {
+           if (!pokemonSlug || !speciesSlug || pokemonSlug === speciesSlug) return '';
+           const prefix = `${speciesSlug}-`;
+           if (pokemonSlug.startsWith(prefix)) return pokemonSlug.slice(prefix.length);
+           return '';
+       }
 
-           const speciesData = await fetchJsonWithRetry(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`);
+       async function resolveVarietyPokemonId(speciesName, formSuffix) {
+           const speciesJson = await fetchJsonWithRetry(`https://pokeapi.co/api/v2/pokemon-species/${speciesName}`);
+           if (formSuffix) {
+               const targetSlug = `${speciesName}-${formSuffix}`;
+               const hit = speciesJson.varieties.find(v => v.pokemon.name === targetSlug);
+               if (hit) {
+                   const id = getPokemonIdFromUrl(hit.pokemon.url);
+                   if (id) return id;
+               }
+           }
+           const def = speciesJson.varieties.find(v => v.is_default) || speciesJson.varieties[0];
+           return getPokemonIdFromUrl(def.pokemon.url);
+       }
+
+       async function loadEvolutionData(pokemonIdOrName) {
+           const cacheKey = String(pokemonIdOrName);
+           if (evolutionCache.has(cacheKey)) return evolutionCache.get(cacheKey);
+
+           const pokemonData = await fetchJsonWithRetry(`https://pokeapi.co/api/v2/pokemon/${pokemonIdOrName}`);
+           const speciesData = await fetchJsonWithRetry(pokemonData.species.url);
            const chainData = await fetchJsonWithRetry(speciesData.evolution_chain.url);
+           const formSuffix = deriveFormSuffix(pokemonData.name, speciesData.name);
 
-           const names = [...new Set(flattenEvolutionChain(chainData.chain))];
-           const details = await Promise.all(names.map(name => loadPokemonDetails(name)));
+           const speciesOrder = [...new Set(flattenEvolutionChain(chainData.chain))];
+           const ids = await Promise.all(
+               speciesOrder.map(s => resolveVarietyPokemonId(s, formSuffix))
+           );
+           const details = await Promise.all(ids.map(id => loadPokemonDetails(id)));
 
-           evolutionCache.set(pokemonName, details);
+           evolutionCache.set(cacheKey, details);
            return details;
        }
 
-       async function openEvolutionModal(pokemonName, displayName) {
+       async function openEvolutionModal(pokemonIdOrName, displayName) {
            const modalEl = ensureDynamicEvolutionModal();
            const title = modalEl.querySelector('#dynamicEvolutionTitle');
            const body = modalEl.querySelector('#dynamicEvolutionBody');
-           title.textContent = `Évolution de ${displayName}`;
+           title.textContent = `Famille évolutive — ${displayName}`;
            body.innerHTML = '<p class="text-center m-0">Chargement...</p>';
 
            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
            modal.show();
 
            try {
-               const evolutionList = await loadEvolutionData(pokemonName);
+               const evolutionList = await loadEvolutionData(pokemonIdOrName);
+               if (evolutionList.length <= 1) {
+                   body.innerHTML = `
+                       <div class="alert alert-info mb-0 text-center" role="status">
+                           <strong>Aucune évolution</strong><br>
+                           Ce Pokémon est seul dans sa famille évolutive (pas de pré-évolution ni d’évolution suivante dans les données officielles).
+                       </div>
+                   `;
+                   return;
+               }
+
                const slides = evolutionList.map((pokemon, index) => `
                    <div class="carousel-item ${index === 0 ? 'active' : ''} text-center">
                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" class="d-block w-100" alt="${pokemon.name}">
@@ -1663,7 +1701,11 @@
                    </div>
                `;
            } catch (error) {
-               body.innerHTML = '<p class="text-center text-danger m-0">Oups, cette évolution n\'est pas disponible pour le moment. Réessaie dans un instant.</p>';
+               body.innerHTML = `
+                   <div class="alert alert-danger mb-0 text-center" role="alert">
+                       Impossible de charger la famille évolutive (réseau ou service PokéAPI). Réessaie dans un instant.
+                   </div>
+               `;
            }
        }
 
@@ -1694,7 +1736,7 @@
            `;
 
            const button = section.querySelector('button');
-           button.addEventListener('click', () => openEvolutionModal(name, displayName));
+           button.addEventListener('click', () => openEvolutionModal(id, displayName));
            applyCardTypeStyle(section, name);
            return section;
        }
